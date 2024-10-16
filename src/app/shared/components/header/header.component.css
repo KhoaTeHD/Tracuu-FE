@@ -1,0 +1,38 @@
+.nav-bar-container {
+    background-color: #CCF9DC;
+}
+
+.input-search {
+    width: 400px;
+}
+
+.nav-items a {
+    font-weight: 500;
+}
+
+.btn-search {
+    background-color: #3BB000;
+    color: #fff;
+    padding: 6px 16px;
+    border: none;
+    border-radius: 8px;
+
+}
+
+.btn-search:hover {
+    opacity: 0.9;
+}
+
+.nav-link.active {
+    color: #28a745;
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Smartphone */
+@media (max-width: 767px) {
+    .input-search {
+        width: 230px;
+    }
+}

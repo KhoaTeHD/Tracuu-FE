@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { FooterComponent } from "../../shared/components/footer/footer.component";
+import { HeaderComponent } from '../../shared/components/header/header.component';
 
 @Component({
   selector: 'app-searchpage',
   standalone: true,
-  imports: [FormsModule, InputTextModule, FooterComponent],
+  imports: [FormsModule, InputTextModule, FooterComponent, HeaderComponent],
   templateUrl: './searchpage.component.html',
   styleUrl: './searchpage.component.css'
 })
