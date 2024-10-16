@@ -1,6 +1,5 @@
 .footer {
-    background-color: #0E7D35; /* Màu xanh lá */
-
+    background-color: #0E7D35; 
     color: white;
   }
   
@@ -17,19 +16,15 @@
     margin-bottom: 10px;
   }
   
-  .footer .list-unstyled {
-    padding-left: 0;
-    list-style: none;
-  }
   
-    .footer li {
+  .footer li {
     margin-bottom: 5px;
   }
   
   .footer-bottom {
-    background-color: #7EB392; /* Màu nền phía dưới */
+    background-color: #7EB392; 
     padding: 10px;
-    color: #333; /* Màu chữ */
+    color: #333; 
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 0;
