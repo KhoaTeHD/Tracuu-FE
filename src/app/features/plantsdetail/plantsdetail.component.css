@@ -1,0 +1,73 @@
+.text-main-color {
+    font-weight: 600;
+    color: #0e7e36;
+}
+
+.font-20 {
+    font-size: 20px;
+}
+
+.text-bold-700 {
+    font-weight: 700;
+}
+
+
+.text-justify {
+    text-align: justify;
+}
+
+.plant-detail-container {
+    margin-top: 80px;
+}
+
+.thumbnail-img {
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail-img.active {
+    border: 3px solid #0e7e36;
+    opacity: 1;
+}
+
+.thumbnails img,
+.carousel-inner img {
+    border-radius: 8px;
+}
+
+.carousel-item {
+    transition: none;
+}
+
+.btn-slider {
+    background-color: #ccc;
+    width: 40px;
+    height: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.divided-section {
+    width: 100%;
+    border-bottom: 1px solid #176e36;
+}
+
+.infor h6{
+    color: #ff0000;
+    opacity: 0.9;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.similarity_search {
+    border: none;
+    border-radius: 8px;
+    background-color: #0e7e36;
+    color: #fff;
+    padding: 6px 12px;
+}
+
+.similarity_search:hover {
+    opacity: 0.8;
+}

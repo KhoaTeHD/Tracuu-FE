@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg nav-bar-container fixed-top">
+<nav class="navbar navbar-expand-lg nav-bar-container fixed-top py-0">
     <div class="container">
         <a class="navbar-brand">
-            <img width="100%" src="../../../../assets/images/home_page/logo.png" alt="Logo">
+            <img width="60px" height="60px" style="object-fit: cover;" src="../../../../assets/images/home_page/logo.png" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
             <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,7 @@
                         [routerLinkActiveOptions]="{ exact: true }">Tra cứu dược liệu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Giới
+                    <a class="nav-link" [routerLink]="['/gioithieu']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Giới
                         thiệu</a>
                 </li>
             </ul>

@@ -1,0 +1,29 @@
+.text-main-color {
+    font-weight: 600;
+    color: #0e7e36;
+}
+
+.font-20 {
+    font-size: 20px;
+}
+
+.bg-main {
+    background-color: #CCF9DC;
+}
+
+.text-bold-600 {
+    font-weight: 600;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+
+.introduction-container {
+    margin-top: 80px;
+}

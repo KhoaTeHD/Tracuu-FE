@@ -1,0 +1,31 @@
+.text-bold-600 {
+    font-weight: 600;
+}
+
+.bg-main {
+    background-color: #CCF9DC;
+}
+
+.text-limit {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    max-height: 3em;
+}
+
+.plants_interested_title {
+    background-color: #007429;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 0 16px;
+}
+
+.plants_intersted_container {
+    padding: 0 16px;
+}
+
+.plants_intersted_container a {
+    cursor: pointer;
+}

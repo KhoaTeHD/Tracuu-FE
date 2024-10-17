@@ -11,11 +11,11 @@
 }
 
 .btn-search {
-    background-color: #3BB000;
+    background-color: #0e7e36;
     color: #fff;
     padding: 6px 16px;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
 
 }
 
@@ -24,7 +24,7 @@
 }
 
 .nav-link.active {
-    color: #28a745;
+    color: #0e7e36;
     font-weight: bold;
     text-decoration: underline;
     text-underline-offset: 3px;
