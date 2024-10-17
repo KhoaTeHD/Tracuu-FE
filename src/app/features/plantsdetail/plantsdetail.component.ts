@@ -1,13 +1,11 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { HeaderComponent } from '../../shared/components/header/header.component';
-import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-plantsdetail',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, SidebarComponent, CommonModule],
+  imports: [SidebarComponent, CommonModule],
   templateUrl: './plantsdetail.component.html',
   styleUrls: ['./plantsdetail.component.css']
 })
