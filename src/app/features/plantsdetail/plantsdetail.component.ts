@@ -11,10 +11,10 @@ import { CommonModule } from '@angular/common';
 })
 export class PlantsdetailComponent implements AfterViewInit {
   images: string[] = [
-    '../../../assets/images/home_page/anh-thao-1-360x240.png',
-    '../../../assets/images/home_page/bach-benh-360x240.png',
-    '../../../assets/images/home_page/ca-gai-leo-duoc-lieu-tue-linh2-356x240.png',
-    '../../../assets/images/home_page/giao-co-lam-1-360x240.png'
+    'assets/images/home_page/anh-thao-1-360x240.png',
+    'assets/images/home_page/bach-benh-360x240.png',
+    'assets/images/home_page/ca-gai-leo-duoc-lieu-tue-linh2-356x240.png',
+    'assets/images/home_page/giao-co-lam-1-360x240.png'
   ];
   activeIndex: number = 0;
 
