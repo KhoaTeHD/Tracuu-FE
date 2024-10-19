@@ -1,10 +1,10 @@
 <div class="row" style="margin-top: 45px;">
 </div>
 <div class="container-lg my-5">
-    <div class="row">
-        <div class="col-md-4 col-lg-3 shadow p-0 card h-100" style="background-color: #CCF9DC;">
+    <div class="row ps-3">
+        <div class="col-md-4 col-lg-3 p-0 card h-100 d-none d-md-block" style="background-color: #CCF9DC;">
             <div class="mb-3 d-flex align-items-center justify-content-center card-header"
-                style="background-color: #007429; color: white;">
+                style="background-color: #007429; color: white; ">
                 <h4>Tìm kiếm tương đồng</h4>
             </div>
             <div class="mx-4">
@@ -93,13 +93,121 @@
                 <button type="submit" class="btn btn-success w-75">Tìm kiếm</button>
             </div>
         </div>
+        <!-- button canvas -->
+        <button class="btn btn-success d-md-none mb-3 w-auto" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">Tìm kiếm tương đồng</button>
+        <!-- canvas -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasResponsive"
+            aria-labelledby="offcanvasResponsiveLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">Tìm kiếm tương đồng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                    data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="mx-3">
+                    <div class="mb-2 d-flex flex-column gap-2">
+                        <label for="chemistry1">Tinh dầu:</label>
+                        <div>
+                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry1"
+                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
+                                (input)="validateInput($event)">
+                            %
+                        </div>
+                    </div>
+                    <div class="mb-2 d-flex flex-column gap-2">
+                        <label for="chemistry2 ">Protid:</label>
+                        <div>
+                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry2"
+                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
+                                (input)="validateInput($event)">
+                            %
+                        </div>
+                    </div>
+                    <div class="mb-2 d-flex flex-column gap-2">
+                        <label for="chemistry3">Vitamin C:</label>
+                        <div>
+                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry3"
+                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
+                                (input)="validateInput($event)">
+                            mg%
+                        </div>
+                    </div>
+                    <div class="mb-2 d-flex flex-column gap-2">
+                        <label for="chemistry4">Lipid:</label>
+                        <div>
+                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry4"
+                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
+                                (input)="validateInput($event)">
+                            %
+                        </div>
+                    </div>
+                    <div class="mb-2 d-flex flex-column gap-2">
+                        <label for="chemistry5">Tanin:</label>
+                        <div>
+                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry5"
+                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
+                                (input)="validateInput($event)">
+                            %
+                        </div>
+                    </div>
+                    <div class="mb-2 d-flex flex-column gap-2">
+                        <label for="chemistry1">Glucid:</label>
+                        <div>
+                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry1"
+                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
+                                (input)="validateInput($event)">
+                            %
+                        </div>
+                    </div>
+                    <div class="mb-2 d-flex flex-column gap-2">
+                        <label for="chemistry2 ">Alcaloid:</label>
+                        <div>
+                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry2"
+                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
+                                (input)="validateInput($event)">
+                            %
+                        </div>
+                    </div>
+                    <div class="mb-2 d-flex flex-column gap-2">
+                        <label for="chemistry3">Caroten:</label>
+                        <div>
+                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry3"
+                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
+                                (input)="validateInput($event)">
+                            mg%
+                        </div>
+                    </div>
+                    <div class="mb-2 d-flex flex-column gap-2">
+                        <label for="chemistry4">Tinh bột:</label>
+                        <div>
+                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry4"
+                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
+                                (input)="validateInput($event)">
+                            %
+                        </div>
+                    </div>
+                    <div class="mb-2 d-flex flex-column gap-2">
+                        <label for="chemistry5">Cellulose:</label>
+                        <div>
+                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry5"
+                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
+                                (input)="validateInput($event)">
+                            %
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-center my-3">
+                    <button type="submit" class="btn btn-success w-75">Tìm kiếm</button>
+                </div>
+            </div>
+        </div>
         <main class="col-md-8 col-lg-9">
-            <div class="row"></div>
             <div
-                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h1 class="h2">Các dược liệu tìm thấy</h1>
             </div>
-            <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 g-4">
                 <div class="col">
                     <a href="" class="text-decoration-none">
 
@@ -274,21 +382,21 @@
             <div class="mt-4 d-flex justify-content-end">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                      <li class="page-item">
-                        <a class="page-link text-black" href="#" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                        </a>
-                      </li>
-                      <li class="page-item"><a class="page-link text-black" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link text-black" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link text-black" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link text-black" href="#" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>
+                        <li class="page-item">
+                            <a class="page-link text-black" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link text-black" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link text-black" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link text-black" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link text-black" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
                     </ul>
-                  </nav>
+                </nav>
             </div>
         </main>
     </div>
