@@ -35,4 +35,16 @@
     .input-search {
         width: 230px;
     }
+
+    .input-search-container {
+        padding-bottom: 16px;
+    }
 }
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 992px){
+    .input-search-container {
+        padding-bottom: 16px;
+    }
+}
+
