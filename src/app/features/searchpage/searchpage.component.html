@@ -1,7 +1,7 @@
 <div class="row" style="margin-top: 45px;">
 </div>
 <div class="container-lg my-5">
-    <div class="row ps-3">
+    <div class="row mal-0">
         <div class="col-md-4 col-lg-3 p-0 card h-100 d-none d-md-block" style="background-color: #CCF9DC;">
             <div class="mb-3 d-flex align-items-center justify-content-center card-header"
                 style="background-color: #007429; color: white; ">
@@ -94,8 +94,9 @@
             </div>
         </div>
         <!-- button canvas -->
-        <button class="btn btn-success d-md-none mb-3 w-auto" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">Tìm kiếm tương đồng</button>
+        <button class="btn btn-success d-md-none mb-3 w-auto" style="margin-left: 12px;" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">Tìm
+            kiếm tương đồng</button>
         <!-- canvas -->
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasResponsive"
             aria-labelledby="offcanvasResponsiveLabel">
@@ -203,9 +204,16 @@
             </div>
         </div>
         <main class="col-md-8 col-lg-9">
-            <div
-                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Các dược liệu tìm thấy</h1>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom justify-content-between">
+                <h4>Các dược liệu tìm thấy (<span style="color: #12ac48;">21</span> cây thuốc)</h4>
+                <div class="sort-options">
+                    <select id="sortSelect" class="form-select" onchange="sortItems(this.value)">
+                        <option value="">-- Chọn --</option>
+                        <option value="relevance">Liên quan</option> <!-- Tùy chọn "Phù hợp" -->
+                        <option value="az">Từ A-Z</option>
+                        <option value="za">Từ Z-A</option>
+                    </select>
+                </div>
             </div>
             <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 g-4">
                 <div class="col">
@@ -216,7 +224,9 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin"><span class="text-bold-500"><span
+                                            class="text-bold-500">Công dụng:</span></span> Chữa tê thấp, đau nhức xương
+                                    khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
@@ -230,7 +240,8 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
+                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
@@ -244,7 +255,8 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
+                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
@@ -258,7 +270,8 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
+                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
@@ -272,7 +285,8 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
+                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
@@ -286,7 +300,8 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
+                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
@@ -300,7 +315,8 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
+                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
@@ -314,7 +330,8 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
+                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
@@ -328,7 +345,8 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
+                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
@@ -342,7 +360,8 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin text-algin"><span class="text-bold-500">Công dụng:</span>
+                                    Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
@@ -356,7 +375,8 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
+                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
@@ -370,7 +390,8 @@
                                 class="card-img-top" height="180" alt="Sản phẩm 1">
                             <div class="card-body">
                                 <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text">Công dụng: Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
+                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
+                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
                                     cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
                             </div>
                         </div>
