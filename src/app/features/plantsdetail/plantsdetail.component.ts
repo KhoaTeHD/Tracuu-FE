@@ -23,11 +23,12 @@ export class PlantsdetailComponent implements AfterViewInit {
   ngAfterViewInit() {
     const carouselElement = this.carousel.nativeElement as HTMLElement;
     const carousel = new (window as any).bootstrap.Carousel(carouselElement, {
-      interval: false, // Tắt tự động chuyển slide
+      interval: 3000, // Tự động chuyển slide mỗi 3 giây
+      ride: 'carousel' // Bật tự động chạy khi tải trang
     });
 
     // Bắt sự kiện slide thay đổi trong carousel
-    carouselElement.addEventListener('slide.bs.carousel', (event: any) => {
+    carouselElement.addEventListener('slid.bs.carousel', (event: any) => {
       this.activeIndex = event.to; // Cập nhật activeIndex với slide hiện tại
     });
   }
@@ -35,8 +36,19 @@ export class PlantsdetailComponent implements AfterViewInit {
   setActiveImage(index: number) {
     this.activeIndex = index;
     const carouselElement = this.carousel.nativeElement as HTMLElement;
-    // Cập nhật carousel đến slide tương ứng
     const carousel = new (window as any).bootstrap.Carousel(carouselElement);
-    carousel.to(index);
+    carousel.to(index); // Chuyển đến slide được chọn khi nhấn vào thumbnail
+  }
+
+  prevSlide() {
+    const carouselElement = this.carousel.nativeElement as HTMLElement;
+    const carousel = new (window as any).bootstrap.Carousel(carouselElement);
+    carousel.prev();
+  }
+
+  nextSlide() {
+    const carouselElement = this.carousel.nativeElement as HTMLElement;
+    const carousel = new (window as any).bootstrap.Carousel(carouselElement);
+    carousel.next();
   }
 }
