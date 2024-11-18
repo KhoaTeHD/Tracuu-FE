@@ -1,3 +1,5 @@
+<!-- Toast sẽ hiển thị ở đây trong 1s, mặc định là top-right -->
+<p-toast [life]="1000"></p-toast>
 <nav class="navbar navbar-expand-lg nav-bar-container fixed-top py-0">
     <div class="container">
         <a class="navbar-brand">
@@ -8,11 +10,11 @@
         </button>
         <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto nav-items">
-                <li class="nav-item ps-lg-3">
+                <li class="nav-item ps-lg-2">
                     <a class="nav-link" [routerLink]="['/']" routerLinkActive="active"
                         [routerLinkActiveOptions]="{ exact: true }">Trang chủ</a>
                 </li>
-                <li class="nav-item px-lg-3">
+                <li class="nav-item px-lg-2">
                     <a class="nav-link" [routerLink]="['/tracuu']" routerLinkActive="active"
                         [routerLinkActiveOptions]="{ exact: true }">Tra cứu dược liệu</a>
                 </li>
@@ -22,12 +24,21 @@
                 </li>
             </ul>
             <form class="d-flex mt-2 mt-lg-0 align-items-center input-search-container">
-                <input class="form-control me-2 input-search flex-md-fill" type="text" placeholder="Nhập tên cây thuốc">
-                <button class="btn-search" type="button">
+                <input class="form-control me-2 input-search flex-md-fill" type="text" placeholder="Nhập tên cây thuốc" [(ngModel)]="searchQuery"
+                name="searchQuery" (keydown.enter)="onSearch()" required>
+                <button class="btn-search" type="button" (click)="onSearch()">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    Tra cứu
+                    Tìm kiếm
                 </button>
             </form>
+            <div class="dropdown ms-3 admin-option">
+                <div class="dropdown-toggle" data-bs-toggle="dropdown" style="cursor: pointer;">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+                <ul class="dropdown-menu py-0" style="font-size: 12px;" >
+                  <li><a class="dropdown-item" href="#" style="background-color: rgba(238, 248, 240, 0.5); cursor: pointer;">Đăng nhập trang quản trị</a></li>
+                </ul>
+              </div>
         </div>
     </div>
 </nav>

@@ -1,12 +1,80 @@
-.text-algin{
+.text-algin {
     text-align: justify;
 }
+
 .text-bold-500 {
     font-weight: 500;
 }
 
-@media (min-width: 768px) { 
-    .mal-0{
+.text-main-color {
+    color: #0e7e36;
+}
+
+.text-usage {
+    color: rgb(12, 44, 162);
+}
+
+.card-text {
+    display: -webkit-box;
+    /* Bật chế độ hộp để có thể dùng -webkit-line-clamp */
+    -webkit-box-orient: vertical;
+    /* Thiết lập hướng theo chiều dọc */
+    -webkit-line-clamp: 3;
+    /* Giới hạn văn bản trong 3 dòng */
+    overflow: hidden;
+    /* Ẩn nội dung tràn ra ngoài */
+    text-overflow: ellipsis;
+    /* Thêm dấu ... khi văn bản bị cắt */
+    white-space: normal;
+}
+
+
+.sience-name-text {
+    display: -webkit-box;
+    /* Bật chế độ hộp để có thể dùng -webkit-line-clamp */
+    -webkit-box-orient: vertical;
+    /* Thiết lập hướng theo chiều dọc */
+    -webkit-line-clamp: 1;
+    /* Giới hạn văn bản trong 3 dòng */
+    overflow: hidden;
+    /* Ẩn nội dung tràn ra ngoài */
+    text-overflow: ellipsis;
+    /* Thêm dấu ... khi văn bản bị cắt */
+    white-space: normal;
+}
+
+.card-hover:hover .card-img-hover {
+    opacity: 0.8;
+}
+
+::ng-deep .ngx-pagination .current {
+    background-color: #0e7e36 !important;
+    color: white !important;
+    border-radius: 4px;
+}
+
+::ng-deep .ngx-pagination .current:hover {
+    background-color: #0e7e36 !important;
+}
+
+::ng-deep .ngx-pagination a {
+    text-decoration: none !important;
+}
+
+/* Smartphone */
+@media (max-width: 767px) {
+    
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 992px){
+    .input-chemistry {
+        width: 80%;
+    }
+}
+
+@media (min-width: 768px) {
+    .mal-0 {
         margin-left: 0px;
     }
- } 
+}

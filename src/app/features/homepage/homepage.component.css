@@ -51,6 +51,20 @@
     overflow-x: hidden; /* Ẩn thanh cuộn ngang */
 }
 
+.btn-see-more {
+    display: inline-block;
+    text-decoration: none;
+    color: #007429;
+    border: 1px solid #007429;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn-see-more:hover {
+    opacity: 0.8;
+}
+
 /* Smartphone */
 @media (max-width: 767px) {
     .m_search_container, .container-do-you-know {

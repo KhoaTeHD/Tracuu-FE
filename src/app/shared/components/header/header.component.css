@@ -33,11 +33,15 @@
 /* Smartphone */
 @media (max-width: 767px) {
     .input-search {
-        width: 230px;
+        width: 220px;
     }
 
     .input-search-container {
         padding-bottom: 16px;
+    }
+
+    .admin-option {
+        margin-bottom: 20px;
     }
 }
 
@@ -45,6 +49,10 @@
 @media (min-width: 768px) and (max-width: 992px){
     .input-search-container {
         padding-bottom: 16px;
+    }
+
+    .admin-option {
+        margin-bottom: 20px;
     }
 }
 

@@ -1,96 +1,27 @@
+<app-header/>
 <div class="row" style="margin-top: 45px;">
 </div>
 <div class="container-lg my-5">
     <div class="row mal-0">
-        <div class="col-md-4 col-lg-3 p-0 card h-100 d-none d-md-block" style="background-color: #CCF9DC;">
-            <div class="mb-3 d-flex align-items-center justify-content-center card-header"
-                style="background-color: #007429; color: white; ">
-                <h4>Tìm kiếm tương đồng</h4>
+        <div class="col-md-4 col-lg-3 p-0 card h-100 d-none d-md-block"
+            style="background-color: #e8f7ed; border: none; box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);">
+            <div class="d-flex align-items-center justify-content-center card-header"
+                style="background-color: #007429; color: white;">
+                <p class="mb-0" style="font-size: 18px;">Tìm kiếm tương đồng</p>
             </div>
-            <div class="mx-4">
-                <div class="mb-2 d-flex flex-column gap-2">
-                    <label for="chemistry1">Tinh dầu:</label>
-                    <div>
-                        <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry1"
-                            min="0" max="200" step="0.001" placeholder="nhập giá trị" (input)="validateInput($event)">
-                        %
-                    </div>
-                </div>
-                <div class="mb-2 d-flex flex-column gap-2">
-                    <label for="chemistry2 ">Protid:</label>
-                    <div>
-                        <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry2"
-                            min="0" max="200" step="0.001" placeholder="nhập giá trị" (input)="validateInput($event)">
-                        %
-                    </div>
-                </div>
-                <div class="mb-2 d-flex flex-column gap-2">
-                    <label for="chemistry3">Vitamin C:</label>
-                    <div>
-                        <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry3"
-                            min="0" max="200" step="0.001" placeholder="nhập giá trị" (input)="validateInput($event)">
-                        mg%
-                    </div>
-                </div>
-                <div class="mb-2 d-flex flex-column gap-2">
-                    <label for="chemistry4">Lipid:</label>
-                    <div>
-                        <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry4"
-                            min="0" max="200" step="0.001" placeholder="nhập giá trị" (input)="validateInput($event)">
-                        %
-                    </div>
-                </div>
-                <div class="mb-2 d-flex flex-column gap-2">
-                    <label for="chemistry5">Tanin:</label>
-                    <div>
-                        <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry5"
-                            min="0" max="200" step="0.001" placeholder="nhập giá trị" (input)="validateInput($event)">
-                        %
-                    </div>
-                </div>
-                <div class="mb-2 d-flex flex-column gap-2">
-                    <label for="chemistry1">Glucid:</label>
-                    <div>
-                        <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry1"
-                            min="0" max="200" step="0.001" placeholder="nhập giá trị" (input)="validateInput($event)">
-                        %
-                    </div>
-                </div>
-                <div class="mb-2 d-flex flex-column gap-2">
-                    <label for="chemistry2 ">Alcaloid:</label>
-                    <div>
-                        <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry2"
-                            min="0" max="200" step="0.001" placeholder="nhập giá trị" (input)="validateInput($event)">
-                        %
-                    </div>
-                </div>
-                <div class="mb-2 d-flex flex-column gap-2">
-                    <label for="chemistry3">Caroten:</label>
-                    <div>
-                        <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry3"
-                            min="0" max="200" step="0.001" placeholder="nhập giá trị" (input)="validateInput($event)">
-                        mg%
-                    </div>
-                </div>
-                <div class="mb-2 d-flex flex-column gap-2">
-                    <label for="chemistry4">Tinh bột:</label>
-                    <div>
-                        <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry4"
-                            min="0" max="200" step="0.001" placeholder="nhập giá trị" (input)="validateInput($event)">
-                        %
-                    </div>
-                </div>
-                <div class="mb-2 d-flex flex-column gap-2">
-                    <label for="chemistry5">Cellulose:</label>
-                    <div>
-                        <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry5"
-                            min="0" max="200" step="0.001" placeholder="nhập giá trị" (input)="validateInput($event)">
-                        %
+            <div class="px-4">
+                <p class="mt-3 mb-2" style="font-size: 11px; color: #007429; font-weight: 500;">*Giá trị là số thập phân > 0</p>
+                <div class="mb-3 d-flex flex-column gap-2" *ngFor="let key of chemistryKeys">
+                    <label [for]="key" style="font-weight: 500;">{{ chemistryLabels[key] }}:</label>
+                    <div class="d-flex align-items-center">
+                        <input [id]="key" [(ngModel)]="chemistryData[key]" pInputText class="flex-grow-1 px-2 py-1 input-chemistry" type="number" min="0"
+                            step="0.001" (input)="validateInput($event)">
+                        <p class="mb-0 label-unit" style="width: 40px; text-align: end;">{{ key === 'vitamin_c' || key === 'caroten' ? 'mg%' : '%' }}</p>
                     </div>
                 </div>
             </div>
-            <div class="d-flex align-items-center justify-content-center my-3">
-                <button type="submit" class="btn btn-success w-75">Tìm kiếm</button>
+            <div class="m-4">
+                <button type="submit" class="btn btn-success w-100" style="font-weight: 500;" (click)="transferChemistryDataToURL()">Tìm kiếm</button>
             </div>
         </div>
         <!-- button canvas -->
@@ -106,319 +37,66 @@
                     data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <div class="mx-3">
-                    <div class="mb-2 d-flex flex-column gap-2">
-                        <label for="chemistry1">Tinh dầu:</label>
-                        <div>
-                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry1"
-                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
-                                (input)="validateInput($event)">
-                            %
-                        </div>
-                    </div>
-                    <div class="mb-2 d-flex flex-column gap-2">
-                        <label for="chemistry2 ">Protid:</label>
-                        <div>
-                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry2"
-                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
-                                (input)="validateInput($event)">
-                            %
-                        </div>
-                    </div>
-                    <div class="mb-2 d-flex flex-column gap-2">
-                        <label for="chemistry3">Vitamin C:</label>
-                        <div>
-                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry3"
-                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
-                                (input)="validateInput($event)">
-                            mg%
-                        </div>
-                    </div>
-                    <div class="mb-2 d-flex flex-column gap-2">
-                        <label for="chemistry4">Lipid:</label>
-                        <div>
-                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry4"
-                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
-                                (input)="validateInput($event)">
-                            %
-                        </div>
-                    </div>
-                    <div class="mb-2 d-flex flex-column gap-2">
-                        <label for="chemistry5">Tanin:</label>
-                        <div>
-                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry5"
-                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
-                                (input)="validateInput($event)">
-                            %
-                        </div>
-                    </div>
-                    <div class="mb-2 d-flex flex-column gap-2">
-                        <label for="chemistry1">Glucid:</label>
-                        <div>
-                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry1"
-                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
-                                (input)="validateInput($event)">
-                            %
-                        </div>
-                    </div>
-                    <div class="mb-2 d-flex flex-column gap-2">
-                        <label for="chemistry2 ">Alcaloid:</label>
-                        <div>
-                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry2"
-                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
-                                (input)="validateInput($event)">
-                            %
-                        </div>
-                    </div>
-                    <div class="mb-2 d-flex flex-column gap-2">
-                        <label for="chemistry3">Caroten:</label>
-                        <div>
-                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry3"
-                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
-                                (input)="validateInput($event)">
-                            mg%
-                        </div>
-                    </div>
-                    <div class="mb-2 d-flex flex-column gap-2">
-                        <label for="chemistry4">Tinh bột:</label>
-                        <div>
-                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry4"
-                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
-                                (input)="validateInput($event)">
-                            %
-                        </div>
-                    </div>
-                    <div class="mb-2 d-flex flex-column gap-2">
-                        <label for="chemistry5">Cellulose:</label>
-                        <div>
-                            <input pInputText type="number" style="height: 30px;" class="w-75" name="" id="chemistry5"
-                                min="0" max="200" step="0.001" placeholder="nhập giá trị"
-                                (input)="validateInput($event)">
-                            %
+                <div class="px-4">
+                    <p class="mb-2" style="font-size: 11px; color: #007429; font-weight: 500;">*Giá trị là số thập phân > 0</p>
+                    <div class="mb-3 d-flex flex-column gap-2" *ngFor="let key of chemistryKeys">
+                        <label [for]="key" style="font-weight: 500;">{{ chemistryLabels[key] }}:</label>
+                        <div class="d-flex align-items-center">
+                            <input [id]="key" [(ngModel)]="chemistryData[key]" pInputText class="flex-grow-1 px-2 py-1 input-chemistry" type="number" min="0"
+                                step="0.001" (input)="validateInput($event)">
+                            <p class="mb-0 label-unit" style="width: 40px; text-align: end;">{{ key === 'vitamin_c' || key === 'caroten' ? 'mg%' : '%' }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex align-items-center justify-content-center my-3">
-                    <button type="submit" class="btn btn-success w-75">Tìm kiếm</button>
+                <div class="m-4">
+                    <button type="submit" class="btn btn-success w-100" style="font-weight: 500;" (click)="transferChemistryDataToURL()">Tìm kiếm</button>
                 </div>
             </div>
         </div>
-        <main class="col-md-8 col-lg-9">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom justify-content-between">
-                <h4>Các dược liệu tìm thấy (<span style="color: #12ac48;">21</span> cây thuốc)</h4>
+        <main class="col-md-8 col-lg-9 ps-md-3">
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom justify-content-between pb-3">
+                <p style="font-size: 20px; font-weight: 500;" class="mb-0">{{title}} (<span style="color: rgb(233, 81, 81);">{{totalPlants}}</span> cây)</p>
                 <div class="sort-options">
-                    <select id="sortSelect" class="form-select" onchange="sortItems(this.value)">
-                        <option value="">-- Chọn --</option>
-                        <option value="relevance">Liên quan</option> <!-- Tùy chọn "Phù hợp" -->
+                    <select id="sortSelect" class="form-select" (change)="onSortChange($any($event.target).value)">
+                        <option value="">--Chọn--</option>
                         <option value="az">Từ A-Z</option>
                         <option value="za">Từ Z-A</option>
                     </select>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 g-4">
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
+            <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 g-4 pt-1">
+                <div *ngIf="isLoading">Đang tải dữ liệu...</div>
+                <div class="col card-hover"
+                    *ngFor="let plant of plants | paginate: { itemsPerPage: 12, currentPage: currentPage }">
+                    <a [routerLink]="['/danhsachcaythuoc', plant.id]" class="text-decoration-none">
+                        <div class="card h-100">
                             <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin"><span class="text-bold-500"><span
-                                            class="text-bold-500">Công dụng:</span></span> Chữa tê thấp, đau nhức xương
-                                    khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
+                                <img src="../../../assets/images/home_page/tam-gui-gao-duoc-lieu-tue-linh-356x240.png"
+                                    class="card-img-top rounded-1 card-img-hover" style="object-fit: cover" height="180"
+                                    alt="Ảnh cây thuốc">
+                                <p class="mt-3 text-main-color mb-1 sience-name-text"
+                                    style="font-size: 18px; font-weight: 500;">{{ plant.vietnameseName }}</p>
+                                <p class="text-main-color mb-1 sience-name-text">({{ plant.scientificName }})</p>
+                                <p class="card-text text-algin">
+                                    <span class="text-bold-500"><span class="text-bold-500 text-usage">Công
+                                            dụng:</span></span>
+                                    {{ plant.effect }}
+                                </p>
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
-                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
-                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
-                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
-                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
-                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
-                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
-                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
-                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin text-algin"><span class="text-bold-500">Công dụng:</span>
-                                    Chữa tê thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
-                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="" class="text-decoration-none">
-
-                        <div class="card h-40">
-                            <img src="https://tracuuduoclieu.vn/wp-content/uploads/2018/06/ca-gai-leo-duoc-lieu-tue-linh.jpg"
-                                class="card-img-top" height="180" alt="Sản phẩm 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Cà gai leo</h5>
-                                <p class="card-text text-algin"><span class="text-bold-500">Công dụng:</span> Chữa tê
-                                    thấp, đau nhức xương khớp, phù thũng, ho gà, rắn
-                                    cắn, viêm gan, giải độc gan, mụn nhọt, lở ngứa (Rễ sắc uống)</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-
+                <div *ngIf="!isLoading && plants.length === 0">
+                    <p>Không tìm thấy kết quả phù hợp.</p>
+                  </div>
             </div>
+
             <div class="mt-4 d-flex justify-content-end">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link text-black" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link text-black" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link text-black" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link text-black" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link text-black" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <pagination-controls (pageChange)="onPageChange($event)" previousLabel="Trước" nextLabel="Tiếp"
+                    [maxSize]="6" [autoHide]="true"></pagination-controls>
             </div>
         </main>
     </div>
 </div>
+<app-footer/>
