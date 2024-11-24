@@ -71,7 +71,7 @@ export class HomepageComponent {
   
         this.displayedRareLevelPlantList = selectedPlants;
       }
-    }, 60000); // 60000 ms = 1 phút
+    }, 30000); // 60000 ms = 1 phút
   }
   
 }
