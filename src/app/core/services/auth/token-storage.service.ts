@@ -24,26 +24,7 @@ export class TokenStorageService {
   clearToken(): void {
     this.cookieService.delete(this.tokenKey, '/');
   }
-
-  saveUserId(userId: string): void {
-    this.cookieService.set('userId', userId, {
-      path: '/',          // Cookie có hiệu lực trên toàn bộ ứng dụng
-      expires: 7,         // Cookie tồn tại trong 7 ngày
-      secure: true,       // Cookie chỉ được gửi qua kết nối HTTPS
-      sameSite: 'Strict'  // Chỉ gửi cookie trong cùng domain, tránh CSRF
-    });
-  }
-
-  getUserId(): string | null {
-    const userId = this.cookieService.get('userId');
-    return userId ? userId : null;
-  }
-
-  // Xóa userId khỏi cookie
-  deleteUserId(): void {
-    this.cookieService.delete('userId', '/'); // Đường dẫn phải khớp với đường dẫn khi lưu
-  }
-
+  
   saveUser(userDTO: any): void {
     const userString = JSON.stringify(userDTO); // Chuyển đối tượng thành chuỗi JSON
     this.cookieService.set('user', userString, { 
