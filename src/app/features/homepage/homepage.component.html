@@ -37,62 +37,13 @@
 <div class="container m_search_container">
     <p class="text-center text-main-color mb-3 font-18">DƯỢC LIỆU ĐƯỢC TÌM KIẾM NHIỀU NHẤT</p>
     <div class="row">
-        <a class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3 text-decoration-none" style="cursor: pointer;" [routerLink]="['/plants/001']">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/dia-long-1-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Địa long</p>
-        </a>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/bach-benh-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Mật nhân</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/tam-gui-gao-duoc-lieu-tue-linh-356x240.png"
-                    alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Tầm gửi gạo</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/sam-to-nu-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Sâm tố nữ</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets\images\home_page\anh-thao-1-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Anh thảo</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/giao-co-lam-1-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Giảo cổ lam</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/sam-cau-4-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Sâm cau</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/ca-gai-leo-duoc-lieu-tue-linh2-356x240.png"
-                    alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Cà gai leo</p>
+        <div *ngFor="let plant of theMostSearchedMedicinalPlantsList" class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
+            <a [routerLink]="['/danhsachcaythuoc', plant.id]" class="text-decoration-none" style="cursor: pointer;">
+                <div class="">
+                    <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="{{plant.images[0].url}}" alt="ảnh">
+                </div>
+                <p class="text-center text-main-color mt-3">{{plant.vietnameseName}}</p>
+            </a>
         </div>
     </div>
 </div>
@@ -165,62 +116,13 @@
 <div class="container m_search_container">
     <p class="text-center text-main-color mb-3 font-18">MỘT SỐ DƯỢC LIỆU QÚY</p>
     <div class="row">
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3 text-decoration-none" style="cursor: pointer;">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/dia-long-1-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Tinh dầu</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/bach-benh-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Protid</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/tam-gui-gao-duoc-lieu-tue-linh-356x240.png"
-                    alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Vitamin C</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/sam-to-nu-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Lipid</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/anh-thao-1-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Tanin</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/giao-co-lam-1-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Glucid</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/sam-cau-4-360x240.png" alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Alcaloid</p>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-            <div class="">
-                <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="assets/images/home_page/ca-gai-leo-duoc-lieu-tue-linh2-356x240.png"
-                    alt="ảnh">
-            </div>
-            <p class="text-center text-main-color mt-3">Caroten</p>
+        <div *ngFor="let plant of displayedRareLevelPlantList" class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
+            <a [routerLink]="['/danhsachcaythuoc', plant.id]" class="text-decoration-none" style="cursor: pointer;">
+                <div class="">
+                    <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="{{plant.images[0].url}}" alt="ảnh">
+                </div>
+                <p class="text-center text-main-color mt-3">{{plant.vietnameseName}}</p>
+            </a>
         </div>
     </div>
 </div>

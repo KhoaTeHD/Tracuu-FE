@@ -1,3 +1,4 @@
+import { Image } from "./image.model";
 import { Family } from "./family.model";
 
 export interface MedicinalPlant {
@@ -13,4 +14,7 @@ export interface MedicinalPlant {
     search_count: number;
     familyId: number;
     family: Family;
+    rareLevel: number;
+    summaryEffect: string;
+    images: Image[];
 }

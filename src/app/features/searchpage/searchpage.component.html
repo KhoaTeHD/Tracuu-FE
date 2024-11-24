@@ -72,8 +72,8 @@
                     <a [routerLink]="['/danhsachcaythuoc', plant.id]" class="text-decoration-none">
                         <div class="card h-100">
                             <div class="card-body">
-                                <img src="../../../assets/images/home_page/tam-gui-gao-duoc-lieu-tue-linh-356x240.png"
-                                    class="card-img-top rounded-1 card-img-hover" style="object-fit: cover" height="180"
+                                <img src="{{plant.images[0].url}}"
+                                    class="card-img-top rounded-1 card-img-hover" style="object-fit: cover" height="200"
                                     alt="Ảnh cây thuốc">
                                 <p class="mt-3 text-main-color mb-1 sience-name-text"
                                     style="font-size: 18px; font-weight: 500;">{{ plant.vietnameseName }}</p>
@@ -81,7 +81,7 @@
                                 <p class="card-text text-algin">
                                     <span class="text-bold-500"><span class="text-bold-500 text-usage">Công
                                             dụng:</span></span>
-                                    {{ plant.effect }}
+                                    {{ plant.summaryEffect }}
                                 </p>
                             </div>
                         </div>

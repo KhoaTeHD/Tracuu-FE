@@ -16,12 +16,7 @@ import { FooterComponent } from '../../shared/components/footer/footer.component
   styleUrls: ['./plantsdetail.component.css']
 })
 export class PlantsdetailComponent implements OnInit, AfterViewInit {
-  images: string[] = [
-    'assets/images/home_page/anh-thao-1-360x240.png',
-    'assets/images/home_page/bach-benh-360x240.png',
-    'assets/images/home_page/ca-gai-leo-duoc-lieu-tue-linh2-356x240.png',
-    'assets/images/home_page/giao-co-lam-1-360x240.png'
-  ];
+
   activeIndex: number = 0;
   plantDetail: MedicinalPlant | undefined;
   plantData: any;
@@ -33,11 +28,14 @@ export class PlantsdetailComponent implements OnInit, AfterViewInit {
 
   // Hàm ngOnInit thực hiện việc lấy ID từ route params và gọi hàm getPlantDetail
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.getPlantDetail(+id);
-    }
-    window.scrollTo(0, 0);
+    // Lắng nghe sự thay đổi của URL paramMap
+    this.route.paramMap.subscribe((paramMap) => {
+      const id = paramMap.get('id');
+      if (id) {
+        this.getPlantDetail(+id); // Gọi lại hàm lấy dữ liệu chi tiết
+      }
+      window.scrollTo(0, 0); // Cuộn về đầu trang
+    });
   }
 
   // Hàm getPlantDetail thực hiện việc gọi API để lấy thông tin chi tiết của cây thuốc
@@ -57,28 +55,28 @@ export class PlantsdetailComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     const carouselElement = this.carousel.nativeElement as HTMLElement;
-  
+
     // Khởi tạo carousel instance
     const carousel = new (window as any).bootstrap.Carousel(carouselElement, {
       interval: 3000, // Chuyển slide sau mỗi 3 giây
       ride: 'carousel' // Kích hoạt tự động chạy
     });
-  
+
     // Đăng ký sự kiện "slid.bs.carousel"
     carouselElement.addEventListener('slid.bs.carousel', (event: any) => {
       this.activeIndex = event.to; // Cập nhật activeIndex
     });
-  
+
     // Log kiểm tra
     console.log('Bootstrap carousel initialized:', carousel);
   }
-  
+
 
   setActiveImage(index: number) {
     this.activeIndex = index;
     const carouselElement = this.carousel.nativeElement as HTMLElement;
     const carousel = new (window as any).bootstrap.Carousel(carouselElement);
-    if(carousel) {
+    if (carousel) {
       carousel.to(index);
     }
   }

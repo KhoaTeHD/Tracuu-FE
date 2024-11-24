@@ -21,4 +21,19 @@ export class FamilyService {
   getFamilyById(id: number): Observable<ApiResponse<Family>> {
     return this.http.get<ApiResponse<Family>>(`${this.apiUrl}/${id}`);
   }
+
+  // POST /api/Family
+  createFamily(family: Family): Observable<ApiResponse<Family>> {
+    return this.http.post<ApiResponse<Family>>(`${this.apiUrl}`, family);
+  }
+
+  // PUT /api/Family/{id}
+  updateFamily(id: number, family: Family): Observable<ApiResponse<Family>> {
+    return this.http.put<ApiResponse<Family>>(`${this.apiUrl}/${id}`, family);
+  }
+
+  // DELETE /api/Family/{id}
+  deleteFamily(id: number): Observable<ApiResponse<void>> {
+    return this.http.delete<ApiResponse<void>>(`${this.apiUrl}/${id}`);
+  }
 }

@@ -122,6 +122,7 @@ export class SearchpageComponent implements OnInit {
         this.totalPlants = this.plants.length;
         this.isLoading = false; // Tắt trạng thái loading
         this.title = 'Danh sách cây thuốc';
+        console.log(this.plants);
       }
     } catch (error) {
       console.error('Error fetching medicinal plants', error);

@@ -6,9 +6,9 @@
                 <!-- Phần Carousel -->
                 <div #carousel id="carouselExampleIndicators" class="carousel slide">
                     <div class="carousel-inner">
-                        <div *ngFor="let img of images; let i = index" class="carousel-item"
+                        <div *ngFor="let img of plantDetail?.images; let i = index" class="carousel-item"
                             [class.active]="i === activeIndex">
-                            <img width="100%" [src]="img" class="d-block w-100" alt="Image {{ i }}">
+                            <img width="100%" height="380px" [src]="img.url" class="d-block w-100" alt="Image {{ i }}" style="object-fit: cover;">
                         </div>
                     </div>
                     <button class="carousel-control-prev btn-slider" type="button"
@@ -23,19 +23,19 @@
 
                 <!-- Phần Thumbnail -->
                 <div class="thumbnails mt-2 row" style="margin-left: -4px; margin-right: -4px;">
-                    <div class="col-3 px-1" *ngFor="let img of images; let i = index">
-                        <img width="100%" [src]="img" class="thumbnail-img" [class.active]="i === activeIndex"
+                    <div class="col-3 px-1" *ngFor="let img of plantDetail?.images; let i = index">
+                        <img width="100%" height="80px" style="object-fit: cover;" [src]="img.url" class="thumbnail-img" [class.active]="i === activeIndex"
                             (click)="setActiveImage(i)">
                     </div>
                 </div>
-                <button class="similarity_search mt-4">Tìm cây tương đồng</button>
             </div>
             <div class="col-md-6 pt-3" *ngIf="plantDetail">
                 <p class="text-main-color font-20 text-bold-600 text-justify">{{ plantDetail.vietnameseName }}</p>
                 <p class="text-justify"><b>Tên khoa học:</b> {{ plantDetail.scientificName }}</p>
                 <p class="text-justify"><b>Họ:</b> {{ plantDetail.family.vietnameseName}} -
                     {{plantDetail.family.scientificName}}</p>
-                <p class="text-justify"><b>Công dụng:</b> {{ plantDetail.effect }}</p>
+                <p class="text-justify"><b>Công dụng tóm lượt:</b> {{ plantDetail.summaryEffect }}</p>
+                <button class="similarity_search mt-2">Tìm cây tương đồng</button>
             </div>
         </div>
         <div class="" *ngIf="plantDetail">
@@ -72,3 +72,5 @@
         <app-sidebar />
     </div>
 </div>
+
+<app-footer/>
