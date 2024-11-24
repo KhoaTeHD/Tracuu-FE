@@ -1,0 +1,44 @@
+<div class="container-fuild">
+    <div class="row">
+        <div class="col-12">
+            <a class="btn-close float-end m-2" [routerLink]="['/']" ></a>
+        </div>
+        <div class="col-12 mb-5">
+            <div class="sign-in-modal row m-auto">
+                <div class="d-none d-lg-block col-lg-6 m-0 p-0">
+                    <img class="image-man-korea h-100 w-100" style="object-fit: cover;" src="../../../../assets/images/login/backgroundlogin.jpg"
+                        alt="Background">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 p-4">
+                    <form>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="name" class="form-label title-sign-in text-main-color">Đăng nhập</label>
+                            </div>
+                        </div>
+
+                        <!-- Field: Email -->
+                        <div class="mb-4 mt-3">
+                            <label for="email" class="form-label d-block mb-3">Email</label>
+                            <input type="email" class="form-control" id="email" name="email">
+                        </div>
+
+                        <!-- Field: Password -->
+                        <div class="mb-4 mt-3">
+                            <label for="password" class="form-label d-block mb-3">Mật khẩu</label>
+                            <div class="password-container">
+                                <input class="form-control" id="password" name="password"
+                                    [type]="isPasswordVisible ? 'text' : 'password'">
+                                <a (click)="togglePasswordVisibility()" class="eye-icon-password">
+                                    <p>{{PasswordVisible}}</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn w-100 mt-5 btn-login">Đăng Nhập</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
