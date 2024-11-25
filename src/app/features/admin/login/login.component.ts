@@ -37,7 +37,7 @@ export class LoginComponent {
     if(this.checkEmpty()) {
       this.messageService.add({
         severity: 'error',
-        summary: 'Lỗi',
+        summary: 'Đăng nhập thất bại',
         detail: 'Vui lòng nhập đầy đủ email và mật khẩu!'
       });
       return;
@@ -52,8 +52,8 @@ export class LoginComponent {
       error: err => {
         this.messageService.add({
           severity: 'error',
-          summary: 'Lỗi',
-          detail: 'Sai email hoặc mật khẩu!'
+          summary: 'Đăng nhập thất bại',
+          detail: 'Email hoặc mật khẩu không chính xác!'
         });
       }
     });
