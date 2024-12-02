@@ -1,0 +1,162 @@
+<div id="layoutSidenav_content">
+  <main>
+    <div class="container-fluid px-4">
+      <h1 class="mt-4">Cây thuốc</h1>
+      <div class="mb-3 d-flex flex-row-reverse">
+        <button type="button" class="btn btn-dark" (click)="showDialog('add')">
+          Thêm cây thuốc
+        </button>
+      </div>
+      <div class="card mb-4">
+        <p-toast></p-toast>
+        <p-confirmDialog></p-confirmDialog>
+        <div class="card-body">
+          <p-table
+            #dt
+            editMode="row"
+            [value]="plants"
+            dataKey="id"
+            [paginator]="true"
+            [rows]="10"
+            [globalFilterFields]="['id', 'scientificName', 'vietnameseName']"
+            [responsiveLayout]="'scroll'"
+          >
+            <ng-template pTemplate="caption">
+              <div class="d-flex">
+                <span class="p-input-icon-left ml-auto">
+                  <i class="pi pi-search"></i>
+                  <input
+                    pInputText
+                    type="text"
+                    style="width: 200px"
+                    (input)="handleInput($event, dt)"
+                    placeholder="Tìm kiếm"
+                  />
+                </span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th>ID</th>
+                <th>Tên khoa học</th>
+                <th>Tên tiếng Việt</th>
+                <th>Thuộc họ</th>
+                <th>Thành phần sử dụng</th>
+                <th>Mô tả</th>
+                <th>Nơi sinh sống</th>
+                <th>cách dùng</th>
+                <th>Công dụng</th>
+                <th>Thành phần hóa học</th>
+                <th>Số lần tra cứu</th>
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="body"
+              let-plant
+              let-editing="editing"
+              let-ri="rowIndex"
+            >
+              <tr [pEditableRow]="plant">
+                <td>{{ plant.id }}</td>
+                <td>
+                  {{ plant.scientificName }}
+                </td>
+                <td >
+                  {{ plant.vietnameseName }}
+                </td>
+                <td>
+                  {{
+                    plant.family.vietnameseName +
+                      " - " +
+                      plant.family.scientificName
+                  }}
+                </td>
+                <td >
+                    {{ plant.partUsed }}
+                </td>
+                <td>
+                    {{ plant.description }}
+                </td>
+                <td >
+                    {{ plant.habitat }}
+                </td>
+                <td>
+                    {{ plant.usage }}
+                </td>
+                <td>
+                    {{ plant.effect }}
+                </td>
+                <td>
+                    {{ plant.chemicalComposition }}
+                </td>
+                <td>
+                    {{ plant.search_count }}
+                </td>
+                <td>
+                  <div
+                    class="flex align-items-center justify-content-center gap-2"
+                  >
+                    <button
+                      *ngIf="!editing"
+                      pButton
+                      pRipple
+                      type="button"
+                      pInitEditableRow
+                      icon="pi pi-pencil"
+                      (click)="onRowEditInit(plant)"
+                      class="p-button-rounded p-button-text"
+                    ></button>
+                    <button
+                      *ngIf="!editing"
+                      pButton
+                      pRipple
+                      type="button"
+                      icon="pi pi-trash"
+                      (click)="deleteplant(plant)"
+                      class="p-button-rounded p-button-text p-button-danger"
+                    ></button>
+                    <button
+                      *ngIf="editing"
+                      pButton
+                      pRipple
+                      type="button"
+                      pSaveEditableRow
+                      icon="pi pi-check"
+                      (click)="onRowEditSave(plant, ri)"
+                      class="p-button-rounded p-button-text p-button-success mr-2"
+                    ></button>
+                    <button
+                      *ngIf="editing"
+                      pButton
+                      pRipple
+                      type="button"
+                      pCancelEditableRow
+                      icon="pi pi-times"
+                      (click)="onRowEditCancel(plant, ri)"
+                      class="p-button-rounded p-button-text p-button-danger"
+                    ></button>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- <app-admin-footer></app-admin-footer> -->
+</div>
+
+<p-dialog header="{{ dialogTitle }} cây thuốc" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" styleClass="p-fluid">
+    <form>
+        <div class="mb-4">
+            <label for="name" class="form-label">Tên khoa học</label>
+            <input type="text" class="form-control" id="name" placeholder="Nhập tên" name="name" [(ngModel)]="createPlant.scientificName">
+        </div>
+        <div class="d-flex justify-content-end gap-2 mt-4">
+            <p-button label="Hủy" severity="secondary" (onClick)="visible = false" />
+            <p-button label="Lưu" (onClick)="visible = false" type="submit" />
+        </div>
+    </form>
+</p-dialog>

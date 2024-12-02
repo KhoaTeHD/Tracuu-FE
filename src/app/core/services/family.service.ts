@@ -8,7 +8,7 @@ import { ApiResponse } from '../models/api-response.model';
   providedIn: 'root'
 })
 export class FamilyService {
-  private apiUrl = 'http://localhost:7150/api/Family';
+  private apiUrl = 'https://localhost:7150/api/Family';
 
   constructor(private http: HttpClient) {}
 

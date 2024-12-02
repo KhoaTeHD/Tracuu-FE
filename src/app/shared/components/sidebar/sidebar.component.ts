@@ -30,7 +30,8 @@ export class SidebarComponent {
       const data = await firstValueFrom(this.medicinalPlantService.getAllMedicinalPlants());
       if (data.isSuccess && Array.isArray(data.result)) {
         // Sắp xếp danh sách theo thuộc tính search_count (giảm dần)
-        data.result.sort((a, b) => b.search_count - a.search_count);
+
+        data.result.sort((a, b) => (b.search_count ?? 0) - (a.search_count ?? 0));
   
         // Lấy tối đa 8 phần tử đầu tiên
         this.theMostSearchedMedicinalPlantsList = data.result.slice(0, 4);

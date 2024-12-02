@@ -1,0 +1,108 @@
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Họ cây thuốc</h1>
+            <div class="mb-3 d-flex flex-row-reverse">
+                <button type="button" class="btn btn-dark" (click)="showDialog()">Thêm họ thuốc</button>
+            </div>
+            <div class="card mb-4">
+                <p-toast></p-toast>
+                <p-confirmDialog></p-confirmDialog>
+                <div class="card-body">
+                    <p-table #dt editMode="row" [value]="families" dataKey="id" [paginator]="true" [rows]="10"
+                        [globalFilterFields]="['id', 'scientificName', 'vietnameseName']" [responsiveLayout]="'scroll'">
+                        <ng-template pTemplate="caption">
+                            <div class="d-flex">
+                                <span class="p-input-icon-left ml-auto">
+                                    <i class="pi pi-search"></i>
+                                    <input pInputText type="text" style="width: 200px;" (input)="handleInput($event, dt)" placeholder="Tìm kiếm" />
+                                </span>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:10%">ID</th>
+                                <th style="width:40%">Tên khoa học</th>
+                                <th style="width:40%">Tên tiếng Việt</th>
+                                <th style="width:10%"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-family let-editing="editing" let-ri="rowIndex">
+                            <tr [pEditableRow]="family">
+                                <td>{{ family.id }}</td>
+                                <td>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText type="text" [(ngModel)]="family.scientificName" />
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{ family.scientificName }}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText type="text" [(ngModel)]="family.vietnameseName" />
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{ family.vietnameseName }}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <!-- <td>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <p-dropdown [options]="statuses" appendTo="body" [(ngModel)]="color.status" />
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            <p-tag [value]="color.status ? 'Hoạt động' : 'Ngừng bán' " [severity]="getSeverity(color.status)" />
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td> -->
+                                <td>
+                                    <div class="flex align-items-center justify-content-center gap-2">
+                                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow
+                                            icon="pi pi-pencil" (click)="onRowEditInit(family)"
+                                            class="p-button-rounded p-button-text">
+                                        </button>
+                                        <button *ngIf="!editing" pButton pRipple type="button"
+                                            icon="pi pi-trash" (click)="deletefamily(family)"
+                                            class="p-button-rounded p-button-text p-button-danger">
+                                        </button>
+                                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
+                                            icon="pi pi-check" (click)="onRowEditSave(family, ri)"
+                                            class="p-button-rounded p-button-text p-button-success mr-2">
+                                        </button>
+                                        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow
+                                            icon="pi pi-times" (click)="onRowEditCancel(family, ri)"
+                                            class="p-button-rounded p-button-text p-button-danger">
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- <app-admin-footer></app-admin-footer> -->
+</div>
+
+<p-dialog header="Thêm họ thuốc" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" styleClass="p-fluid">
+    <form>
+        <div class="mb-4">
+            <label for="name" class="form-label">Tên khoa học</label>
+            <input type="text" class="form-control" id="name" placeholder="Nhập tên khoa học" name="name" [(ngModel)]="createFamily.scientificName">
+        </div>
+        <div class="mb-4">
+            <label for="vietnameseName" class="form-label">Tên tiếng việt</label>
+            <input type="text" class="form-control" id="vietnameseName" placeholder="Nhập tên tiếng Việt" name="vietnameseName" [(ngModel)]="createFamily.vietnameseName">
+        </div>
+        <div class="d-flex justify-content-end gap-2 mt-4">
+            <p-button label="Hủy" severity="secondary" (onClick)="visible = false" />
+            <p-button label="Lưu" (onClick)="visible = false" type="submit" />
+        </div>
+    </form>
+</p-dialog>

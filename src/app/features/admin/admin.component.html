@@ -1,0 +1,31 @@
+<div class="sb-nav-fixed">
+    <app-admin-header></app-admin-header>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <a class="nav-link" routerLink="/admin/dashboard">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Thống kê
+                        </a>
+                        <a class="nav-link" routerLink="/admin/family">
+                            <div class="sb-nav-link-icon"><i class="fa-brands fa-pagelines"></i></div>
+                            Quản lý họ thuốc
+                        </a>
+                        <a class="nav-link" routerLink="/admin/medicinalplant">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-seedling"></i></div>
+                            Quản lý cây thuốc
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Tài khoản:</div>
+                    Võ Quang Đăng Khoa
+                </div>
+            </nav>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+

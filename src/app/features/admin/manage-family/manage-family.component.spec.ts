@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManagerFamilyComponent } from './manager-family.component';
+import { ManageFamilyComponent } from './manage-family.component';
 
-describe('ManagerFamilyComponent', () => {
-  let component: ManagerFamilyComponent;
-  let fixture: ComponentFixture<ManagerFamilyComponent>;
+describe('ManageFamilyComponent', () => {
+  let component: ManageFamilyComponent;
+  let fixture: ComponentFixture<ManageFamilyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ManagerFamilyComponent]
+      imports: [ManageFamilyComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ManagerFamilyComponent);
+    fixture = TestBed.createComponent(ManageFamilyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
