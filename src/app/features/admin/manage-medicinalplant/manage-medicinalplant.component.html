@@ -58,42 +58,42 @@
               let-ri="rowIndex"
             >
               <tr [pEditableRow]="plant">
-                <td>{{ plant.id }}</td>
-                <td>
+                <td class="table-cell-multiline-ellipsis">{{ plant.id }}</td>
+                <td class="table-cell-multiline-ellipsis">
                   {{ plant.scientificName }}
                 </td>
-                <td >
+                <td class="table-cell-multiline-ellipsis">
                   {{ plant.vietnameseName }}
                 </td>
-                <td>
+                <td class="table-cell-multiline-ellipsis">
                   {{
                     plant.family.vietnameseName +
                       " - " +
                       plant.family.scientificName
                   }}
                 </td>
-                <td >
+                <td class="table-cell-multiline-ellipsis">
                     {{ plant.partUsed }}
                 </td>
-                <td>
+                <td class="table-cell-multiline-ellipsis">
                     {{ plant.description }}
                 </td>
-                <td >
+                <td class="table-cell-multiline-ellipsis">
                     {{ plant.habitat }}
                 </td>
-                <td>
+                <td class="table-cell-multiline-ellipsis">
                     {{ plant.usage }}
                 </td>
-                <td>
+                <td class="table-cell-multiline-ellipsis">
                     {{ plant.effect }}
                 </td>
-                <td>
+                <td class="table-cell-multiline-ellipsis">
                     {{ plant.chemicalComposition }}
                 </td>
-                <td>
+                <td class="table-cell-multiline-ellipsis">
                     {{ plant.search_count }}
                 </td>
-                <td>
+                <td class="table-cell-multiline-ellipsis">
                   <div
                     class="flex align-items-center justify-content-center gap-2"
                   >
