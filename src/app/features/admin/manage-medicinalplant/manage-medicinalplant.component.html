@@ -40,48 +40,71 @@
             </ng-template>
             <ng-template pTemplate="body" let-plant let-editing="editing" let-ri="rowIndex">
               <tr [pEditableRow]="plant">
-                <td>{{ plant.id }}</td>
-                <td>
+                <td class="table-cell-multiline-ellipsis">{{ plant.id }}</td>
+                <td class="table-cell-multiline-ellipsis">
                   {{ plant.scientificName }}
                 </td>
-                <td>
+                <td class="table-cell-multiline-ellipsis">
                   {{ plant.vietnameseName }}
                 </td>
-                <td>
+                <td class="table-cell-multiline-ellipsis">
                   {{
                   plant.family.vietnameseName +
                   " - " +
                   plant.family.scientificName
                   }}
                 </td>
-                <td>
-                  {{ plant.partUsed }}
+                <td class="table-cell-multiline-ellipsis">
+                    {{ plant.partUsed }}
                 </td>
-                <td>
-                  {{ plant.description }}
+                <td class="table-cell-multiline-ellipsis">
+                    {{ plant.description }}
                 </td>
-                <td>
-                  {{ plant.habitat }}
+                <td class="table-cell-multiline-ellipsis">
+                    {{ plant.habitat }}
                 </td>
-                <td>
-                  {{ plant.usage }}
+                <td class="table-cell-multiline-ellipsis">
+                    {{ plant.usage }}
                 </td>
-                <td>
-                  {{ plant.effect }}
+                <td class="table-cell-multiline-ellipsis">
+                    {{ plant.effect }}
                 </td>
-                <td>
-                  {{ plant.chemicalComposition }}
+                <td class="table-cell-multiline-ellipsis">
+                    {{ plant.chemicalComposition }}
                 </td>
-                <td>
-                  {{ plant.search_count }}
+                <td class="table-cell-multiline-ellipsis">
+                    {{ plant.search_count }}
                 </td>
-                <td>
-                  <div class="flex align-items-center justify-content-center gap-2">
-                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
-                      (click)="onRowEditInit(plant)" class="p-button-rounded p-button-text"></button>
-                    <button *ngIf="!editing" pButton pRipple type="button" icon="pi pi-trash"
-                      (click)="deleteplant(plant)" class="p-button-rounded p-button-text p-button-danger"></button>
-                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+                <td class="table-cell-multiline-ellipsis">
+                  <div
+                    class="flex align-items-center justify-content-center gap-2"
+                  >
+                    <button
+                      *ngIf="!editing"
+                      pButton
+                      pRipple
+                      type="button"
+                      pInitEditableRow
+                      icon="pi pi-pencil"
+                      (click)="onRowEditInit(plant)"
+                      class="p-button-rounded p-button-text"
+                    ></button>
+                    <button
+                      *ngIf="!editing"
+                      pButton
+                      pRipple
+                      type="button"
+                      icon="pi pi-trash"
+                      (click)="deleteplant(plant)"
+                      class="p-button-rounded p-button-text p-button-danger"
+                    ></button>
+                    <button
+                      *ngIf="editing"
+                      pButton
+                      pRipple
+                      type="button"
+                      pSaveEditableRow
+                      icon="pi pi-check"
                       (click)="onRowEditSave(plant, ri)"
                       class="p-button-rounded p-button-text p-button-success mr-2"></button>
                     <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"

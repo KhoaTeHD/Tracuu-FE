@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AdminHeaderComponent } from '../../shared/components/admin-header/admin-header.component';
 import { AdminSidebarComponent } from '../../shared/components/admin-sidebar/admin-sidebar.component';
+import { TokenStorageService } from '../../core/services/auth/token-storage.service';
 
 
 @Component({
@@ -13,5 +14,16 @@ import { AdminSidebarComponent } from '../../shared/components/admin-sidebar/adm
   encapsulation: ViewEncapsulation.None,
 })
 export class AdminComponent {
+  user: any | null = null;
+  constructor(
+    private tokenStorageService: TokenStorageService,
+  ) {}
 
+  async ngOnInit(): Promise<void> {
+    await this.loadUser();
+  }
+
+  async loadUser(): Promise<void> {
+    this.user = this.tokenStorageService.getUser();
+  }
 }

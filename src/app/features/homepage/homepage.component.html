@@ -40,7 +40,7 @@
         <div *ngFor="let plant of theMostSearchedMedicinalPlantsList" class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
             <a [routerLink]="['/danhsachcaythuoc', plant.id]" class="text-decoration-none" style="cursor: pointer;">
                 <div class="">
-                    <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="{{plant.images[0].url}}" alt="ảnh">
+                    <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" [src]="plant?.images?.[0]?.url" alt="ảnh">
                 </div>
                 <p class="text-center text-main-color mt-3">{{plant.vietnameseName}}</p>
             </a>
@@ -119,7 +119,7 @@
         <div *ngFor="let plant of displayedRareLevelPlantList" class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3">
             <a [routerLink]="['/danhsachcaythuoc', plant.id]" class="text-decoration-none" style="cursor: pointer;">
                 <div class="">
-                    <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" src="{{plant.images[0].url}}" alt="ảnh">
+                    <img class="rounded-3" width="100%" style="object-fit: cover; height: 160px;" [src]="plant?.images?.[0]?.url" alt="ảnh">
                 </div>
                 <p class="text-center text-main-color mt-3">{{plant.vietnameseName}}</p>
             </a>

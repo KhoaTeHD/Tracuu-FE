@@ -5,3 +5,10 @@
     width: 2.5rem;
     padding: 0.5rem 0;
 }
+.table-cell-multiline-ellipsis {
+    max-width: 300px; /* Giới hạn chiều rộng hợp lý */
+    overflow: hidden; /* Ẩn nội dung vượt quá */
+    text-overflow: ellipsis; /* Dấu ba chấm cho nội dung tràn */
+    word-break: break-word; /* Ngắt từ dài */
+    white-space: nowrap; /* Không cho xuống dòng */
+  }
