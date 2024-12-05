@@ -1,0 +1,23 @@
+.chart-container {
+    margin-top: 70px;
+}
+
+.chart-container p-chart {
+    width: 100% !important;
+    height: 100% !important; /* Đặt chiều cao phù hợp với card */
+    padding: 4px;
+}
+
+/* Laptop */
+@media (min-width: 993px) {
+    .chart-container {
+        margin-left: 220px;
+    }
+}
+
+/* SmartPhone */
+@media (max-width: 767px) {
+    .chart-container {
+        padding: 0 16px;
+    }
+}

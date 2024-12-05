@@ -8,23 +8,31 @@ import { FormsModule } from '@angular/forms';
 // Import MessageService để sử dụng chức năng hiển thị thông báo, phải install thư viện primeng
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { TokenStorageService } from '../../../core/services/auth/token-storage.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, FormsModule, ToastModule],
+  imports: [RouterModule, FormsModule, ToastModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   providers: [MessageService] // Cung cấp MessageService
 })
 export class HeaderComponent {
   searchQuery: string = '';
+  token: any | null = null;
 
   constructor(
     private router: Router,
     private medicinalPlantService: MedicinalPlantService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private tokenStorageService: TokenStorageService
   ) {}
+
+  async ngOnInit(): Promise<void> {
+    this.token = this.tokenStorageService.getToken();
+  }
 
   // Xử lý khi nhấn "Tìm kiếm"
   async onSearch(): Promise<void> {

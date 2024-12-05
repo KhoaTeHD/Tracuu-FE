@@ -31,7 +31,7 @@
                     Tìm kiếm
                 </button>
             </form>
-            <div class="dropdown ms-3 admin-option">
+            <div *ngIf="!token" class="dropdown ms-3 admin-option">
                 <div class="dropdown-toggle" data-bs-toggle="dropdown" style="cursor: pointer;">
                     <i class="fa-solid fa-screwdriver-wrench"></i>
                 </div>

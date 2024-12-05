@@ -1,0 +1,15 @@
+<div class="row gx-3 gy-3 justify-content-center align-items-stretch chart-container">
+    <!-- Chart 1 -->
+    <div class="col-12 col-md-4 d-flex">
+        <div class="card flex-grow-1 d-flex justify-content-center">
+            <p-chart type="doughnut" [data]="data" [options]="options"></p-chart>
+        </div>
+    </div>
+
+    <!-- Chart 2 -->
+    <div class="col-12 col-md-7 d-flex">
+        <div class="card flex-grow-1 d-flex justify-content-center">
+            <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { AdminComponent } from './features/admin/admin.component';
 import { ManageFamilyComponent } from './features/admin/manage-family/manage-family.component';
 import { ManageMedicinalplantComponent } from './features/admin/manage-medicinalplant/manage-medicinalplant.component';
+import { DashboardComponent } from './features/admin/dashboard/dashboard.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -19,7 +20,7 @@ export const routes: Routes = [
         path: 'admin', 
         component: AdminComponent, 
         children: [
-            { path: 'dashboard', component: ManageFamilyComponent  },
+            { path: '', component: DashboardComponent  },
             { path: 'family', component: ManageFamilyComponent  },
             { path: 'medicinalplant', component: ManageMedicinalplantComponent },
         ],
