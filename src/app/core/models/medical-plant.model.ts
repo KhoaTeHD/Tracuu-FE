@@ -3,8 +3,8 @@ import { Family } from "./family.model";
 
 export interface MedicinalPlant {
     id?: number;
-    vietnameseName?: string;
-    scientificName?: string;
+    vietnameseName: string;
+    scientificName: string;
     partUsed?: string;
     description?: string;
     habitat?: string;
@@ -16,5 +16,5 @@ export interface MedicinalPlant {
     family?: Family;
     rareLevel?: number;
     summaryEffect?: string;
-    images?: Image[];
+    images: Image[];
 }

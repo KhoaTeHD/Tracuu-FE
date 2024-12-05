@@ -11,27 +11,14 @@
         <p-toast></p-toast>
         <p-confirmDialog></p-confirmDialog>
         <div class="card-body">
-          <p-table
-            #dt
-            editMode="row"
-            [value]="plants"
-            dataKey="id"
-            [paginator]="true"
-            [rows]="10"
-            [globalFilterFields]="['id', 'scientificName', 'vietnameseName']"
-            [responsiveLayout]="'scroll'"
-          >
+          <p-table #dt editMode="row" [value]="plants" dataKey="id" [paginator]="true" [rows]="10"
+            [globalFilterFields]="['id', 'scientificName', 'vietnameseName']" [responsiveLayout]="'scroll'">
             <ng-template pTemplate="caption">
               <div class="d-flex">
                 <span class="p-input-icon-left ml-auto">
                   <i class="pi pi-search"></i>
-                  <input
-                    pInputText
-                    type="text"
-                    style="width: 200px"
-                    (input)="handleInput($event, dt)"
-                    placeholder="Tìm kiếm"
-                  />
+                  <input pInputText type="text" style="width: 200px" (input)="handleInput($event, dt)"
+                    placeholder="Tìm kiếm" />
                 </span>
               </div>
             </ng-template>
@@ -51,91 +38,55 @@
                 <th></th>
               </tr>
             </ng-template>
-            <ng-template
-              pTemplate="body"
-              let-plant
-              let-editing="editing"
-              let-ri="rowIndex"
-            >
+            <ng-template pTemplate="body" let-plant let-editing="editing" let-ri="rowIndex">
               <tr [pEditableRow]="plant">
                 <td>{{ plant.id }}</td>
                 <td>
                   {{ plant.scientificName }}
                 </td>
-                <td >
+                <td>
                   {{ plant.vietnameseName }}
                 </td>
                 <td>
                   {{
-                    plant.family.vietnameseName +
-                      " - " +
-                      plant.family.scientificName
+                  plant.family.vietnameseName +
+                  " - " +
+                  plant.family.scientificName
                   }}
                 </td>
-                <td >
-                    {{ plant.partUsed }}
+                <td>
+                  {{ plant.partUsed }}
                 </td>
                 <td>
-                    {{ plant.description }}
-                </td>
-                <td >
-                    {{ plant.habitat }}
+                  {{ plant.description }}
                 </td>
                 <td>
-                    {{ plant.usage }}
+                  {{ plant.habitat }}
                 </td>
                 <td>
-                    {{ plant.effect }}
+                  {{ plant.usage }}
                 </td>
                 <td>
-                    {{ plant.chemicalComposition }}
+                  {{ plant.effect }}
                 </td>
                 <td>
-                    {{ plant.search_count }}
+                  {{ plant.chemicalComposition }}
                 </td>
                 <td>
-                  <div
-                    class="flex align-items-center justify-content-center gap-2"
-                  >
-                    <button
-                      *ngIf="!editing"
-                      pButton
-                      pRipple
-                      type="button"
-                      pInitEditableRow
-                      icon="pi pi-pencil"
-                      (click)="onRowEditInit(plant)"
-                      class="p-button-rounded p-button-text"
-                    ></button>
-                    <button
-                      *ngIf="!editing"
-                      pButton
-                      pRipple
-                      type="button"
-                      icon="pi pi-trash"
-                      (click)="deleteplant(plant)"
-                      class="p-button-rounded p-button-text p-button-danger"
-                    ></button>
-                    <button
-                      *ngIf="editing"
-                      pButton
-                      pRipple
-                      type="button"
-                      pSaveEditableRow
-                      icon="pi pi-check"
+                  {{ plant.search_count }}
+                </td>
+                <td>
+                  <div class="flex align-items-center justify-content-center gap-2">
+                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
+                      (click)="onRowEditInit(plant)" class="p-button-rounded p-button-text"></button>
+                    <button *ngIf="!editing" pButton pRipple type="button" icon="pi pi-trash"
+                      (click)="deleteplant(plant)" class="p-button-rounded p-button-text p-button-danger"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
                       (click)="onRowEditSave(plant, ri)"
-                      class="p-button-rounded p-button-text p-button-success mr-2"
-                    ></button>
-                    <button
-                      *ngIf="editing"
-                      pButton
-                      pRipple
-                      type="button"
-                      pCancelEditableRow
-                      icon="pi pi-times"
+                      class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
                       (click)="onRowEditCancel(plant, ri)"
-                      class="p-button-rounded p-button-text p-button-danger"
-                    ></button>
+                      class="p-button-rounded p-button-text p-button-danger"></button>
                   </div>
                 </td>
               </tr>
@@ -148,15 +99,194 @@
   <!-- <app-admin-footer></app-admin-footer> -->
 </div>
 
-<p-dialog header="{{ dialogTitle }} cây thuốc" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" styleClass="p-fluid">
-    <form>
-        <div class="mb-4">
-            <label for="name" class="form-label">Tên khoa học</label>
-            <input type="text" class="form-control" id="name" placeholder="Nhập tên" name="name" [(ngModel)]="createPlant.scientificName">
+<p-dialog header="{{ dialogTitle }} cây thuốc" [modal]="true" [(visible)]="visible" [style]="{ width: '60rem' }"
+  styleClass="p-fluid">
+  <form [formGroup]="plantForm" (ngSubmit)="onSubmit()">
+    <div id="medicinalPlantContainer">
+      <div class="row">
+        <!-- Tên cây thuốc -->
+        <div class="col-md-6">
+          <label for="vietnameseName" class="form-label">Tên Việt Nam</label>
+          <input type="text" id="vietnameseName" formControlName="vietnameseName" class="form-control"
+            placeholder="Nhập tên tiếng Việt" />
+          <small class="text-danger"
+            *ngIf="plantForm.get('vietnameseName')?.invalid && plantForm.get('vietnameseName')?.dirty && plantForm.get('vietnameseName')?.touched">
+            Trường này không được bỏ trống!
+          </small>
         </div>
-        <div class="d-flex justify-content-end gap-2 mt-4">
-            <p-button label="Hủy" severity="secondary" (onClick)="visible = false" />
-            <p-button label="Lưu" (onClick)="visible = false" type="submit" />
+        <div class="col-md-6">
+          <label for="scientificName" class="form-label">Tên khoa học</label>
+          <input type="text" id="scientificName" formControlName="scientificName" class="form-control"
+            placeholder="Nhập tên khoa học" />
+          <small class="text-danger"
+            *ngIf="plantForm.get('scientificName')?.invalid && plantForm.get('scientificName')?.dirty && plantForm.get('scientificName')?.touched">
+            Trường này không được bỏ trống!
+          </small>
         </div>
-    </form>
+      </div>
+
+      <div class="row mt-3">
+        <!-- Phần sử dụng -->
+        <div class="col-md-4">
+          <label for="partUsed" class="form-label">Phần sử dụng</label>
+          <input type="text" id="partUsed" formControlName="partUsed" class="form-control"
+            placeholder="Nhập phần sử dụng" />
+          <small class="text-danger"
+            *ngIf="plantForm.get('partUsed')?.invalid && plantForm.get('partUsed')?.dirty && plantForm.get('partUsed')?.touched">
+            Trường này không được bỏ trống!
+          </small>
+        </div>
+        <!-- Mức độ hiếm -->
+        <div class="col-md-4">
+          <label for="rareLevel" class="form-label">Mức độ hiếm</label>
+          <p-dropdown formControlName="rareLevel" [options]="rareLevels" placeholder="Chọn mức độ" optionValue="id"
+            optionLabel="name">
+          </p-dropdown>
+        </div>
+
+        <div class="col-md-4">
+          <label for="familyId" class="form-label">Họ thuốc</label>
+          <p-dropdown
+          formControlName="familyId"
+            [options]="families"
+            placeholder="Chọn họ thuốc"
+            optionValue="id"
+            optionLabel="vietnameseName"
+            [filter]="true"
+            filterBy="vietnameseName" 
+          >
+          </p-dropdown>
+          <small class="text-danger"
+            *ngIf="plantForm.get('familyId')?.invalid && plantForm.get('familyId')?.dirty && plantForm.get('familyId')?.touched">
+            Trường này không được bỏ trống!
+          </small>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <!-- Mô tả -->
+        <div class="col-md-12">
+          <label for="description" class="form-label">Mô tả</label>
+          <textarea id="description" formControlName="description" class="form-control" rows="3"
+            placeholder="Nhập mô tả chi tiết"></textarea>
+            <small class="text-danger"
+            *ngIf="plantForm.get('description')?.invalid && plantForm.get('description')?.dirty && plantForm.get('description')?.touched">
+            Trường này không được bỏ trống!
+          </small>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <label for="summaryEffect" class="form-label">Mô tả tóm tắt</label>
+          <textarea id="summaryEffect" formControlName="summaryEffect" class="form-control" rows="3"
+            placeholder="Nhập mô tả tóm tắt"></textarea>
+          <small class="text-danger"
+            *ngIf="plantForm.get('summaryEffect')?.invalid && plantForm.get('summaryEffect')?.dirty && plantForm.get('summaryEffect')?.touched">
+            Trường này không được bỏ trống!
+          </small>
+        </div>
+        <!-- Mô tả -->
+        <div class="col-md-6">
+          <label for="habitat" class="form-label">Nơi sinh sống</label>
+          <textarea id="habitat" formControlName="habitat" class="form-control" rows="3"
+            placeholder="Nhập nơi sinh sống"></textarea>
+          <small class="text-danger"
+            *ngIf="plantForm.get('habitat')?.invalid && plantForm.get('habitat')?.dirty && plantForm.get('habitat')?.touched">
+            Trường này không được bỏ trống!
+          </small>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <!-- Mô tả -->
+        <div class="col-md-12">
+          <label for="chemicalComposition" class="form-label">Mô tả thành phần hóa học</label>
+          <textarea id="chemicalComposition" formControlName="chemicalComposition" class="form-control" rows="3"
+            placeholder="Nhập mô tả thành phần hóa học"></textarea>
+          <small class="text-danger"
+            *ngIf="plantForm.get('chemicalComposition')?.invalid && plantForm.get('chemicalComposition')?.dirty && plantForm.get('chemicalComposition')?.touched">
+            Trường này không được bỏ trống!
+          </small>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <!-- Mô tả -->
+        <div class="col-md-6">
+          <label for="usage" class="form-label">Cách dùng</label>
+          <textarea id="usage" formControlName="usage" class="form-control" rows="3"
+            placeholder="Nhập cách dùng"></textarea>
+          <small class="text-danger"
+            *ngIf="plantForm.get('usage')?.invalid && plantForm.get('usage')?.dirty && plantForm.get('usage')?.touched">
+            Trường này không được bỏ trống!
+          </small>
+        </div>
+        <div class="col-md-6">
+          <label for="effect" class="form-label">Công dụng</label>
+          <textarea id="effect" formControlName="effect" class="form-control" rows="3"
+            placeholder="Nhập công dụng"></textarea>
+          <small class="text-danger"
+            *ngIf="plantForm.get('effect')?.invalid && plantForm.get('effect')?.dirty && plantForm.get('effect')?.touched">
+            Trường này không được bỏ trống!
+          </small>
+        </div>
+      </div>
+      
+      <div class="row mt-4">
+        <div class="col-12">
+          <p-fileUpload 
+            name="images[]" 
+            (uploadHandler)="onUpload($event)"
+            [multiple]="true" accept="image/*" 
+            maxFileSize="5242880"
+            [customUpload]="true"
+            [auto]="true"
+            (onRemove)="onRemove($event)"
+            chooseLabel="Chọn hình"
+            >
+            <ng-template pTemplate="empty">
+              <div class="flex align-items-center justify-content-center flex-column">
+                  <p class="mt-4 mb-0">Kéo và thả file vào đây để tải lên.</p>
+              </div>
+            </ng-template>
+          </p-fileUpload>
+        </div>
+        <div class="text-danger mt-2" *ngIf="imagesArray.length < 4">
+          Bạn cần tải lên đúng 4 hình ảnh để tiếp tục.
+        </div>
+        <div class="text-danger mt-2" *ngIf="imagesArray.length >= 5">
+          Bạn chỉ được tải lên tối đa 4 hình.
+        </div>
+      </div>
+    </div>
+
+    <!-- nhập vector -->
+
+    <div class="d-flex flex-wrap gap-3 mt-4">
+      <div *ngFor="let control of vectorControls; let i = index" class="flex-column">
+        <label for="dimension-{{ i }}" class="form-label text-center">
+          Giá trị {{ i + 1 }}
+        </label>
+        <input
+          type="number"
+          id="dimension-{{ i }}"
+          [formControl]="control"
+          class="form-control text-center"
+          placeholder="{{ i + 1 }}"
+          style="width: 80px;"
+        />
+      </div>
+    </div>
+
+    <!-- Thông báo lỗi duy nhất -->
+    <small class="text-danger text-center mt-3" *ngIf="plantForm.get('vector')?.invalid && plantForm.get('vector')?.touched">
+      Tất cả các giá trị phải được nhập và hợp lệ!
+    </small>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <p-button label="Hủy" severity="secondary" (onClick)="visible = false"></p-button>
+      <p-button label="Lưu" [disabled]="plantForm.invalid" (onClick)="onSubmit()"></p-button>
+    </div>
+  </form>
 </p-dialog>

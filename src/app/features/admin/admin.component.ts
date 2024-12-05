@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AdminHeaderComponent } from '../../shared/components/admin-header/admin-header.component';
 import { AdminSidebarComponent } from '../../shared/components/admin-sidebar/admin-sidebar.component';
@@ -9,7 +9,8 @@ import { AdminSidebarComponent } from '../../shared/components/admin-sidebar/adm
   standalone: true,
   imports: [RouterOutlet, RouterModule, AdminHeaderComponent],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.css'
+  styleUrl: './admin.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class AdminComponent {
 

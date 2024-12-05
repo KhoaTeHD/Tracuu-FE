@@ -1,66 +1,7 @@
 
-/* .overflow-ellipsis-1 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+@import url('../../../../../node_modules/primeng/resources/primeng.min.css');
 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    text-align: justify;
-
-
-    padding-bottom: 0;
-    margin-bottom: 12px;
-}
-
-.overflow-ellipsis-4 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    text-align: justify;
-
-    padding-bottom: 0;
-    margin-bottom: 12px;
-} */
-
-/* .text-truncate{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-} */
-
-.ellipsis {
-    overflow: hidden;          /* Cắt nội dung thừa */
-    text-overflow: ellipsis;   /* Hiển thị dấu "..." */
-    white-space: nowrap;       /* Không cho xuống dòng */
-    max-width: 200px;          /* Đặt chiều rộng tối đa */
-    display: block;            /* Đảm bảo hoạt động đúng */
-    box-sizing: border-box;    /* Tính cả padding vào kích thước */
-}
-
-.p-table {
-    table-layout: fixed; /* Đảm bảo các cột không tự mở rộng */
-    width: 100%;         /* Đặt chiều rộng bảng */
-}
-
-.p-table th, .p-table td {
-    word-wrap: break-word; /* Cắt từ nếu quá dài */
-}
-
-.ellipsis-multiline {
-    display: -webkit-box;           /* Kích hoạt chế độ hiển thị dạng box */
-    -webkit-box-orient: vertical;  /* Hướng dọc của box */
-    -webkit-line-clamp: 3;         /* Giới hạn hiển thị 3 dòng */
-    overflow: hidden;              /* Cắt nội dung thừa */
-    text-overflow: ellipsis;       /* Thêm dấu "..." nếu nội dung bị cắt */
-    max-height: calc(1.5em * 3);   /* Đảm bảo chiều cao cho 3 dòng */
-    line-height: 1.5;              /* Chiều cao mỗi dòng */
-    word-wrap: break-word;         /* Cắt từ nếu quá dài */
-    box-sizing: border-box;        /* Tính cả padding vào kích thước */
+::ng-deep .p-button.p-button-icon-only {
+    width: 2.5rem;
+    padding: 0.5rem 0;
 }
