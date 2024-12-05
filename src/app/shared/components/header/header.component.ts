@@ -57,4 +57,14 @@ export class HeaderComponent {
       console.log(error);
     }
   }
+
+  goToAdminPage(): void {
+    if(this.token) {
+      // Điều hướng đến trang admin nếu đã đăng nhập
+      this.router.navigate(['/admin']);
+    } else {
+      // Điều hướng đến trang đăng nhập nếu chưa đăng nhập
+      this.router.navigate(['/login']);
+    }
+  }
 }

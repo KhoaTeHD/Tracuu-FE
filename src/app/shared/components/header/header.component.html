@@ -31,12 +31,12 @@
                     Tìm kiếm
                 </button>
             </form>
-            <div *ngIf="!token" class="dropdown ms-3 admin-option">
+            <div class="dropdown ms-3 admin-option">
                 <div class="dropdown-toggle" data-bs-toggle="dropdown" style="cursor: pointer;">
                     <i class="fa-solid fa-screwdriver-wrench"></i>
                 </div>
                 <ul class="dropdown-menu py-0" style="font-size: 12px;" >
-                  <li><a class="dropdown-item" [routerLink]="['/login']"  style="background-color: rgba(238, 248, 240, 0.5); cursor: pointer;">Đăng nhập trang quản trị</a></li>
+                  <li><a class="dropdown-item" (click)="goToAdminPage()"  style="background-color: rgba(238, 248, 240, 0.5); cursor: pointer;">Đến trang quản trị</a></li>
                 </ul>
               </div>
         </div>
