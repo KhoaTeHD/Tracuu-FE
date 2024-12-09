@@ -17,4 +17,5 @@ export interface MedicinalPlant {
     rareLevel?: number;
     summaryEffect?: string;
     images: Image[];
+    vector: number[];
 }
