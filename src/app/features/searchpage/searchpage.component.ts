@@ -193,7 +193,6 @@ export class SearchpageComponent implements OnInit {
 
   // Xử lý khi nhấn "Tìm kiếm tương đồng"
   async transferChemistryDataToURL(): Promise<void> {
-    // Gọi service tìm kiếm
     this.resetNullValues();
 
     // Chuyển `chemistryData` thành query parameters

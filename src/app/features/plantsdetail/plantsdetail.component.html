@@ -35,7 +35,7 @@
                 <p class="text-justify"><b>Họ:</b> {{ plantDetail.family?.vietnameseName}} -
                     {{plantDetail.family?.scientificName}}</p>
                 <p class="text-justify"><b>Công dụng tóm lượt:</b> {{ plantDetail.summaryEffect }}</p>
-                <button class="similarity_search mt-2">Tìm cây tương đồng</button>
+                <button class="similarity_search mt-2" (click)="transferChemistryDataToURL()">Tìm cây tương đồng</button>
             </div>
         </div>
         <div class="" *ngIf="plantDetail">

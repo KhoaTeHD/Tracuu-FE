@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MedicinalPlantService } from '../../core/services/medical-plant.service';
 import { MedicinalPlant } from '../../core/models/medical-plant.model';
 import { firstValueFrom } from 'rxjs';
@@ -19,20 +19,21 @@ export class PlantsdetailComponent implements OnInit, AfterViewInit {
 
   activeIndex: number = 0;
   plantDetail: MedicinalPlant | undefined;
-  plantData: any;
 
   constructor(
     private route: ActivatedRoute,
     private medicinalPlantService: MedicinalPlantService,
+    private router: Router
   ) { }
 
   // Hàm ngOnInit thực hiện việc lấy ID từ route params và gọi hàm getPlantDetail
   ngOnInit(): void {
     // Lắng nghe sự thay đổi của URL paramMap
-    this.route.paramMap.subscribe((paramMap) => {
+    this.route.paramMap.subscribe(async (paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-        this.getPlantDetail(+id); // Gọi lại hàm lấy dữ liệu chi tiết
+        await this.getPlantDetail(+id); // Gọi lại hàm lấy dữ liệu chi tiết
+        console.log(this.plantDetail);
       }
       window.scrollTo(0, 0); // Cuộn về đầu trang
     });
@@ -91,5 +92,54 @@ export class PlantsdetailComponent implements OnInit, AfterViewInit {
     const carouselElement = this.carousel.nativeElement as HTMLElement;
     const carousel = new (window as any).bootstrap.Carousel(carouselElement);
     carousel.next();
+  }
+
+  // Xử lý khi nhấn "Tìm kiếm tương đồng"
+  async transferChemistryDataToURL(): Promise<void> {
+    if (!this.plantDetail || !this.plantDetail.vector) return;
+
+    const chemistryData: { [key: string]: number } = {
+      tinh_dau: 0,
+      vitamin_c: 0,
+      lipid: 0,
+      protid: 0,
+      tanin: 0,
+      glucid: 0,
+      alcaloid: 0,
+      tinh_bot: 0,
+      caroten: 0,
+      cellulose: 0
+    };
+
+    const chemistryKeys = [
+      'tinh_dau',
+      'vitamin_c',
+      'lipid',
+      'protid',
+      'tanin',
+      'glucid',
+      'alcaloid',
+      'tinh_bot',
+      'caroten',
+      'cellulose'
+    ];
+
+    // Chuyển vector thành key-value trong chemistryData
+    chemistryKeys.forEach((key, index) => {
+      chemistryData[key] = this.plantDetail!.vector[index];
+    });
+
+    // Tạo query params từ chemistryData
+    const chemistryParams = Object.entries(chemistryData)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('&');
+
+    console.log('Chemistry Data Params:', chemistryParams); // Kiểm tra kết quả
+
+    // Chuyển đến trang kết quả tìm kiếm với queryParams
+    this.router.navigate(['/tracuu'], {
+      queryParams: { ...chemistryData, page: 1 }, // Reset về trang 1
+      queryParamsHandling: 'merge' // Giữ lại các query params khác nếu có
+    });
   }
 }
