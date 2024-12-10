@@ -53,7 +53,7 @@ export class ManageFamilyComponent implements OnInit {
   clonedFamilies: { [id: number]: Family } = {};
 
   createFamilyForm: FormGroup = new FormGroup({
-    id: new FormControl({ value: 0, disabled: true }),
+    id: new FormControl({ value: null, disabled: true }),
     vietnameseName: new FormControl('', [Validators.required]),
     scientificName: new FormControl('', [Validators.required]),
   });
@@ -83,10 +83,10 @@ export class ManageFamilyComponent implements OnInit {
       if (data.isSuccess && Array.isArray(data.result)) {
         this.families = data.result;
         // Lấy id cuối cùng trong mảng families
-        const lastId = this.families.length > 0 ? this.families[this.families.length - 1].id : 0;
-        this.createFamilyForm.patchValue({
-          id: (lastId ?? 0) + 1, 
-        });
+        // const lastId = this.families.length > 0 ? this.families[this.families.length - 1].id : 0;
+        // this.createFamilyForm.patchValue({
+        //   id: (lastId ?? 0) + 1, 
+        // });
       }
     } catch (error) {
       console.error('Error fetching families', error);

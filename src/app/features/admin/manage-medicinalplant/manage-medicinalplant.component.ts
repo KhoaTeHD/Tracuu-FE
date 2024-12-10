@@ -63,8 +63,10 @@ export class ManageMedicinalplantComponent implements OnInit {
   plants: MedicinalPlant[] = [];
   families: Family[] = [];
   clonedPlants: { [id: number]: MedicinalPlant } = {};
-  dialogTitle: string = 'Thêm';
   isLoading = false; // Trạng thái loading khi submit
+
+  dialogMode: 'add' | 'edit' = 'add'; // Chế độ của dialog (add hoặc edit)
+  selectedPlant: any = null; // Dữ liệu cây thuốc được chọn
 
   plantForm!: FormGroup;
   rareLevels = [
@@ -84,7 +86,7 @@ export class ManageMedicinalplantComponent implements OnInit {
 
   initForm() {
     this.plantForm = this.fb.group({
-      id: 0,
+      id: this.plants.length > 0 ? (this.plants[this.plants.length - 1]?.id ?? 0) + 1 : 0,
       vietnameseName: ['', Validators.required],
       scientificName: ['', Validators.required],
       partUsed: ['', Validators.required],
@@ -152,10 +154,6 @@ export class ManageMedicinalplantComponent implements OnInit {
   }
 
   showDialog(type: string) {
-    if (type === 'add') {
-      //this.createPlant = {};
-      this.dialogTitle = 'Thêm';
-    }
     this.visible = true;
   }
 
@@ -189,29 +187,125 @@ export class ManageMedicinalplantComponent implements OnInit {
     }
   }
 
-  onRowEditInit(plant: MedicinalPlant) {
-    this.clonedPlants[plant.id as number] = { ...plant };
+  openAddDialog() {
+    this.dialogMode = 'add';
+    this.visible = true;
+    
+    // Gán các giá trị mặc định không được null
+    this.initForm();
+
+
+    // Clear uploaded files nếu cần
+    this.uploadedFiles = [];
   }
 
-  onRowEditSave(plant: MedicinalPlant, index: number) {
-    if (plant.vietnameseName?.trim().length !== 0) {
-      //this.editplant(plant);
-      delete this.clonedPlants[plant.id as number];
-    } else {
-      this.plants[index] = this.clonedPlants[plant.id as number];
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Lỗi',
-        detail: 'Tên không hợp lệ',
-      });
-    }
+  openEditDialog(plant: any) {
+    this.dialogMode = 'edit';
+    this.visible = true;
+    this.selectedPlant = plant;
+  
+    // Gán giá trị đầy đủ vào form
+    this.plantForm.patchValue({
+      id: plant.id,
+      vietnameseName: plant.vietnameseName,
+      scientificName: plant.scientificName,
+      partUsed: plant.partUsed,
+      description: plant.description,
+      habitat: plant.habitat,
+      chemicalComposition: plant.chemicalComposition,
+      usage: plant.usage,
+      effect: plant.effect,
+      search_count: plant.search_count,
+      rareLevel: plant.rareLevel,
+      summaryEffect: plant.summaryEffect,
+      familyId: plant.family?.id, // Nếu `family` là object, gán `id`
+    });
+    
+
+    // Gán mảng `images` từ `plant.images`
+    this.uploadedFiles = plant.images.map((image: any) => ({
+      name: image.url.split('/').pop(), // Lấy tên file từ URL
+      url: image.url,
+    }));
+    const imagesArray = this.plantForm.get('images') as FormArray;
+    imagesArray.clear();
+    plant.images.forEach((image: any) => {
+      imagesArray.push(new FormControl({ id: image.id, url: image.url }));
+    });
+
+    // Gán mảng `vector` từ `plant.vector`
+    const vectorArray = this.plantForm.get('vector') as FormArray;
+    vectorArray.clear();
+    plant.vector.forEach((value: any) => {
+      vectorArray.push(
+        this.fb.control(value, [Validators.required, Validators.pattern(/^-?\d+(\.\d+)?$/)])
+      );
+    });
   }
 
-  onRowEditCancel(plant: MedicinalPlant, index: number) {
-    this.plants[index] = this.clonedPlants[plant.id as number];
-    delete this.clonedPlants[plant.id as number];
-  }
 
+  // onSubmit(): void {
+  //   if (this.plantForm.invalid || this.uploadedFiles.length !== 4) {
+  //     this.messageService.add({
+  //       severity: 'error',
+  //       summary: 'Lỗi',
+  //       detail: 'Hãy nhập đầy đủ thông tin và tải lên đúng 4 hình ảnh.',
+  //     });
+  //     return;
+  //   }
+  
+  //   this.isLoading = true; // Bắt đầu loading
+
+  //   const vietnameseName = this.plantForm.value.vietnameseName;
+  //   const id = this.plantForm.value.id; 
+  //   const vector = this.vectorControls.map((control) => control.value); // Lấy giá trị vector từ form
+    
+  //   this.addVectorToQdrant(id, vector, vietnameseName)
+  //   .pipe(
+  //     switchMap(() => {
+  //       // Nếu thêm vector thành công, tiếp tục upload hình ảnh
+  //       return this.uploadFilesToCloudinary( this.uploadedFiles);
+  //     }),
+  //     switchMap((uploadedUrls: string[]) => {
+  //       this.imagesArray.clear();
+  //       // Gán URL hình ảnh vào form
+  //       uploadedUrls.forEach((url) => {
+  //         this.imagesArray.push(new FormControl({ id: 0, url }));
+  //       });
+
+  //       const payload = this.plantForm.value;
+  //       payload.vector = null;
+
+  //       // Gửi dữ liệu cây thuốc đến backend
+  //       return this.http.post('https://localhost:7150/api/MedicinalPlant', payload);
+  //     }),
+  //     catchError((error) => {
+  //       // Xử lý lỗi nếu xảy ra
+  //       this.messageService.add({
+  //         severity: 'error',
+  //         summary: 'Lỗi',
+  //         detail: 'Đã xảy ra lỗi khi xử lý!',
+  //       });
+  //       //console.error('Lỗi khi xử lý:', error);
+  //       return [];
+  //     }),
+  //     finalize(() => {
+  //       this.isLoading = false; // Kết thúc loading
+  //       this.visible = false; // Ẩn dialog
+  //       this.loadPlants(); // Load lại danh sách cây thuốc
+  //     })
+  //   )
+  //   .subscribe((response: any) => {
+  //     // Xử lý thành công
+  //     this.messageService.add({
+  //       severity: 'success',
+  //       summary: 'Thành công',
+  //       detail: 'Cây thuốc đã được tạo thành công!',
+  //     });
+  //   });
+    
+  // }
+  
   onSubmit(): void {
     if (this.plantForm.invalid || this.uploadedFiles.length !== 4) {
       this.messageService.add({
@@ -223,58 +317,71 @@ export class ManageMedicinalplantComponent implements OnInit {
     }
   
     this.isLoading = true; // Bắt đầu loading
-
-    const vietnameseName = this.plantForm.value.vietnameseName;
-    const id = this.plantForm.value.id; 
-    const vector = this.vectorControls.map((control) => control.value); // Lấy giá trị vector từ form
-    
-    this.addVectorToQdrant(id, vector, vietnameseName)
-    .pipe(
-      switchMap(() => {
-        // Nếu thêm vector thành công, tiếp tục upload hình ảnh
-        return this.uploadFilesToCloudinary( this.uploadedFiles);
-      }),
-      switchMap((uploadedUrls: string[]) => {
-        this.imagesArray.clear();
-        // Gán URL hình ảnh vào form
-        uploadedUrls.forEach((url) => {
-          this.imagesArray.push(new FormControl({ id: 0, url }));
-        });
-
-        const payload = this.plantForm.value;
-        payload.vector = null;
-
-        // Gửi dữ liệu cây thuốc đến backend
-        return this.http.post('https://localhost:7150/api/MedicinalPlant', payload);
-      }),
-      catchError((error) => {
-        // Xử lý lỗi nếu xảy ra
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Lỗi',
-          detail: 'Đã xảy ra lỗi khi xử lý!',
-        });
-        //console.error('Lỗi khi xử lý:', error);
-        return [];
-      }),
-      finalize(() => {
-        this.isLoading = false; // Kết thúc loading
-        this.visible = false; // Ẩn dialog
-        this.loadPlants(); // Load lại danh sách cây thuốc
-      })
-    )
-    .subscribe((response: any) => {
-      // Xử lý thành công
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Thành công',
-        detail: 'Cây thuốc đã được tạo thành công!',
-      });
-    });
-    
-  }
   
-
+    const id = this.plantForm.value.id;
+    const vietnameseName = this.plantForm.value.vietnameseName;
+    const vector = this.vectorControls.map((control) => control.value);
+    console.log(id);
+  
+    const updateObservable = this.dialogMode === 'edit'
+      ? this.addVectorToQdrant(id, vector, vietnameseName).pipe(
+          switchMap(() => this.uploadFilesToCloudinary(this.uploadedFiles)),
+          switchMap((uploadedUrls: string[]) => {
+            this.imagesArray.clear();
+            uploadedUrls.forEach((url) => {
+              this.imagesArray.push(new FormControl({ id: 0, url }));
+            });
+  
+            const payload = this.plantForm.value;
+            payload.vector = null;
+  
+            return this.http.put(
+              `https://localhost:7150/api/MedicinalPlant/${id}`,
+              payload
+            );
+          })
+        )
+      : this.addVectorToQdrant(id, vector, vietnameseName).pipe(
+          switchMap(() => this.uploadFilesToCloudinary(this.uploadedFiles)),
+          switchMap((uploadedUrls: string[]) => {
+            this.imagesArray.clear();
+            uploadedUrls.forEach((url) => {
+              this.imagesArray.push(new FormControl({ id: 0, url }));
+            });
+  
+            const payload = this.plantForm.value;
+            payload.vector = null;
+  
+            return this.http.post('https://localhost:7150/api/MedicinalPlant', payload);
+          })
+        );
+  
+    updateObservable
+      .pipe(
+        catchError((error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Lỗi',
+            detail: 'Đã xảy ra lỗi khi xử lý!',
+          });
+          throw error;
+        }),
+        finalize(() => {
+          this.isLoading = false; // Kết thúc loading
+          this.visible = false; // Ẩn dialog
+          this.loadPlants(); // Load lại danh sách cây thuốc
+        })
+      )
+      .subscribe((response) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Thành công',
+          detail: this.dialogMode === 'edit'
+            ? 'Cây thuốc đã được chỉnh sửa thành công!'
+            : 'Cây thuốc đã được thêm thành công!',
+        });
+      });
+  }
 
   uploadFilesToCloudinary(files: File[]): Observable<string[]> {
     const uploadedUrls: string[] = [];
@@ -282,6 +389,7 @@ export class ManageMedicinalplantComponent implements OnInit {
       const formData = new FormData();
       formData.append('file', file); // File cần upload
       formData.append('upload_preset', 'medicinalplants'); // Preset đã tạo
+      
   
       // Trả về Observable cho từng file upload
       return this.http.post<any>('https://api.cloudinary.com/v1_1/ddc4rolln/image/upload', formData).pipe(

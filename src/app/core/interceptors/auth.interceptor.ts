@@ -17,7 +17,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.tokenStorageService.getToken();
+    const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/ddc4rolln/image/upload';
 
+    if (req.url === cloudinaryUrl) {
+      // Không chỉnh sửa yêu cầu gửi tới Cloudinary
+      return next.handle(req);
+    }
+    
     if (token) {
       const clonedReq = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`)

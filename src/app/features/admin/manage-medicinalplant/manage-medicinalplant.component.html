@@ -3,7 +3,7 @@
     <div class="container-fluid px-4">
       <h1 class="mt-4">Cây thuốc</h1>
       <div class="mb-3 d-flex flex-row-reverse">
-        <button type="button" class="btn btn-dark" (click)="showDialog('add')">
+        <button type="button" class="btn btn-dark" (click)="openAddDialog()">
           Thêm cây thuốc
         </button>
       </div>
@@ -39,7 +39,7 @@
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-plant let-editing="editing" let-ri="rowIndex">
-              <tr [pEditableRow]="plant">
+              <tr>
                 <td class="table-cell-multiline-ellipsis">{{ plant.id }}</td>
                 <td class="table-cell-multiline-ellipsis">
                   {{ plant.scientificName }}
@@ -80,36 +80,21 @@
                     class="flex align-items-center justify-content-center gap-2"
                   >
                     <button
-                      *ngIf="!editing"
                       pButton
                       pRipple
                       type="button"
-                      pInitEditableRow
                       icon="pi pi-pencil"
-                      (click)="onRowEditInit(plant)"
+                      (click)="openEditDialog(plant)"
                       class="p-button-rounded p-button-text"
                     ></button>
-                    <button
-                      *ngIf="!editing"
+                    <!-- <button
                       pButton
                       pRipple
                       type="button"
                       icon="pi pi-trash"
                       (click)="deleteplant(plant)"
                       class="p-button-rounded p-button-text p-button-danger"
-                    ></button>
-                    <button
-                      *ngIf="editing"
-                      pButton
-                      pRipple
-                      type="button"
-                      pSaveEditableRow
-                      icon="pi pi-check"
-                      (click)="onRowEditSave(plant, ri)"
-                      class="p-button-rounded p-button-text p-button-success mr-2"></button>
-                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
-                      (click)="onRowEditCancel(plant, ri)"
-                      class="p-button-rounded p-button-text p-button-danger"></button>
+                    ></button> -->
                   </div>
                 </td>
               </tr>
@@ -122,7 +107,7 @@
   <!-- <app-admin-footer></app-admin-footer> -->
 </div>
 
-<p-dialog header="{{ dialogTitle }} cây thuốc" [modal]="true" [(visible)]="visible" [style]="{ width: '60rem' }"
+<p-dialog header="{{ dialogMode === 'edit' ? 'Chỉnh sửa cây thuốc' : 'Thêm cây thuốc' }}" [modal]="true" [(visible)]="visible" [style]="{ width: '60rem' }"
   styleClass="p-fluid">
   <form [formGroup]="plantForm" (ngSubmit)="onSubmit()">
     <div id="medicinalPlantContainer">
@@ -190,7 +175,7 @@
         <!-- Mô tả -->
         <div class="col-md-12">
           <label for="description" class="form-label">Mô tả</label>
-          <textarea id="description" formControlName="description" class="form-control" rows="3"
+          <textarea id="description" formControlName="description" class="form-control" rows="5"
             placeholder="Nhập mô tả chi tiết"></textarea>
             <small class="text-danger"
             *ngIf="plantForm.get('description')?.invalid && plantForm.get('description')?.dirty && plantForm.get('description')?.touched">
@@ -225,7 +210,7 @@
         <!-- Mô tả -->
         <div class="col-md-12">
           <label for="chemicalComposition" class="form-label">Mô tả thành phần hóa học</label>
-          <textarea id="chemicalComposition" formControlName="chemicalComposition" class="form-control" rows="3"
+          <textarea id="chemicalComposition" formControlName="chemicalComposition" class="form-control" rows="4"
             placeholder="Nhập mô tả thành phần hóa học"></textarea>
           <small class="text-danger"
             *ngIf="plantForm.get('chemicalComposition')?.invalid && plantForm.get('chemicalComposition')?.dirty && plantForm.get('chemicalComposition')?.touched">
@@ -238,7 +223,7 @@
         <!-- Mô tả -->
         <div class="col-md-6">
           <label for="usage" class="form-label">Cách dùng</label>
-          <textarea id="usage" formControlName="usage" class="form-control" rows="3"
+          <textarea id="usage" formControlName="usage" class="form-control" rows="4"
             placeholder="Nhập cách dùng"></textarea>
           <small class="text-danger"
             *ngIf="plantForm.get('usage')?.invalid && plantForm.get('usage')?.dirty && plantForm.get('usage')?.touched">
@@ -247,7 +232,7 @@
         </div>
         <div class="col-md-6">
           <label for="effect" class="form-label">Công dụng</label>
-          <textarea id="effect" formControlName="effect" class="form-control" rows="3"
+          <textarea id="effect" formControlName="effect" class="form-control" rows="4"
             placeholder="Nhập công dụng"></textarea>
           <small class="text-danger"
             *ngIf="plantForm.get('effect')?.invalid && plantForm.get('effect')?.dirty && plantForm.get('effect')?.touched">
