@@ -68,7 +68,7 @@
             <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 g-4 pt-1">
                 <div *ngIf="isLoading">Đang tải dữ liệu...</div>
                 <div class="col card-hover"
-                    *ngFor="let plant of plants | paginate: { itemsPerPage: 12, currentPage: currentPage }">
+                    *ngFor="let plant of plants | paginate: { itemsPerPage: 6, currentPage: currentPage }">
                     <a [routerLink]="['/danhsachcaythuoc', plant.id]" class="text-decoration-none">
                         <div class="card h-100">
                             <div class="card-body">
