@@ -197,6 +197,15 @@ export class ManageMedicinalplantComponent implements OnInit {
 
     // Clear uploaded files nếu cần
     this.uploadedFiles = [];
+
+    //const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    let imagesElement = document.querySelector("#medicinalPlantContainer > div.row.mt-4 > div.col-12 > p-fileupload > div > div.p-fileupload-content > div > div > div:nth-child(1) > div:nth-child(4) > button") as HTMLButtonElement;
+    if (imagesElement) {
+      // fileInput.files = null; // Xóa giá trị của input file
+      // fileInput.dispatchEvent(new Event('change'));
+      // (imagesElement as HTMLElement).click();
+      console.log("true");
+    }
   }
 
   openEditDialog(plant: any) {
@@ -223,15 +232,40 @@ export class ManageMedicinalplantComponent implements OnInit {
     
 
     // Gán mảng `images` từ `plant.images`
-    this.uploadedFiles = plant.images.map((image: any) => ({
-      name: image.url.split('/').pop(), // Lấy tên file từ URL
-      url: image.url,
-    }));
-    const imagesArray = this.plantForm.get('images') as FormArray;
-    imagesArray.clear();
-    plant.images.forEach((image: any) => {
-      imagesArray.push(new FormControl({ id: image.id, url: image.url }));
-    });
+    // this.uploadedFiles = plant.images.map((image: any) => ({
+    //   name: image.url.split('/').pop(), // Lấy tên file từ URL
+    //   url: image.url,
+    // }));
+    // const imagesArray = this.plantForm.get('images') as FormArray;
+    // imagesArray.clear();
+    // plant.images.forEach((image: any) => {
+    //   imagesArray.push(new FormControl({ id: image.id, url: image.url }));
+    // });
+
+    if (plant.images && plant.images.length > 0) {
+      const dataTransfer = new DataTransfer();
+  
+      for (const image of plant.images) {
+        // Tạo đối tượng file giả lập từ URL ảnh
+        fetch(image.url)
+          .then((res) => res.blob())
+          .then((blob) => {
+            const fileName = image.url.split('/').pop(); // Lấy tên file từ URL
+            const file = new File([blob], fileName || 'image.jpg', { type: blob.type });
+            dataTransfer.items.add(file);
+  
+            // Gán danh sách file vào input của p-fileUpload
+            const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+            if (fileInput) {
+              fileInput.files = dataTransfer.files;
+              fileInput.dispatchEvent(new Event('change')); // Kích hoạt sự kiện "onSelect"
+            }
+          })
+          .catch((error) => {
+            console.error(`Lỗi khi tải ảnh từ URL ${image.url}:`, error);
+          });
+      }
+    }
 
     // Gán mảng `vector` từ `plant.vector`
     const vectorArray = this.plantForm.get('vector') as FormArray;
@@ -241,70 +275,9 @@ export class ManageMedicinalplantComponent implements OnInit {
         this.fb.control(value, [Validators.required, Validators.pattern(/^-?\d+(\.\d+)?$/)])
       );
     });
+
+    
   }
-
-
-  // onSubmit(): void {
-  //   if (this.plantForm.invalid || this.uploadedFiles.length !== 4) {
-  //     this.messageService.add({
-  //       severity: 'error',
-  //       summary: 'Lỗi',
-  //       detail: 'Hãy nhập đầy đủ thông tin và tải lên đúng 4 hình ảnh.',
-  //     });
-  //     return;
-  //   }
-  
-  //   this.isLoading = true; // Bắt đầu loading
-
-  //   const vietnameseName = this.plantForm.value.vietnameseName;
-  //   const id = this.plantForm.value.id; 
-  //   const vector = this.vectorControls.map((control) => control.value); // Lấy giá trị vector từ form
-    
-  //   this.addVectorToQdrant(id, vector, vietnameseName)
-  //   .pipe(
-  //     switchMap(() => {
-  //       // Nếu thêm vector thành công, tiếp tục upload hình ảnh
-  //       return this.uploadFilesToCloudinary( this.uploadedFiles);
-  //     }),
-  //     switchMap((uploadedUrls: string[]) => {
-  //       this.imagesArray.clear();
-  //       // Gán URL hình ảnh vào form
-  //       uploadedUrls.forEach((url) => {
-  //         this.imagesArray.push(new FormControl({ id: 0, url }));
-  //       });
-
-  //       const payload = this.plantForm.value;
-  //       payload.vector = null;
-
-  //       // Gửi dữ liệu cây thuốc đến backend
-  //       return this.http.post('https://localhost:7150/api/MedicinalPlant', payload);
-  //     }),
-  //     catchError((error) => {
-  //       // Xử lý lỗi nếu xảy ra
-  //       this.messageService.add({
-  //         severity: 'error',
-  //         summary: 'Lỗi',
-  //         detail: 'Đã xảy ra lỗi khi xử lý!',
-  //       });
-  //       //console.error('Lỗi khi xử lý:', error);
-  //       return [];
-  //     }),
-  //     finalize(() => {
-  //       this.isLoading = false; // Kết thúc loading
-  //       this.visible = false; // Ẩn dialog
-  //       this.loadPlants(); // Load lại danh sách cây thuốc
-  //     })
-  //   )
-  //   .subscribe((response: any) => {
-  //     // Xử lý thành công
-  //     this.messageService.add({
-  //       severity: 'success',
-  //       summary: 'Thành công',
-  //       detail: 'Cây thuốc đã được tạo thành công!',
-  //     });
-  //   });
-    
-  // }
   
   onSubmit(): void {
     if (this.plantForm.invalid || this.uploadedFiles.length !== 4) {
@@ -432,31 +405,4 @@ export class ManageMedicinalplantComponent implements OnInit {
   }
   
 
-  deleteplant(plant: MedicinalPlant) {
-    this.confirmationService.confirm({
-      message: 'Bạn có chắc xóa ' + plant.vietnameseName + ' không?',
-      header: 'Xác nhận',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.plantService.deleteMedicinalPlant(plant.id as number).subscribe({
-          next: () => {
-            this.plants = this.plants.filter((val) => val.id !== plant.id);
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Thành công',
-              detail: 'Đã xóa cây thuốc',
-              life: 3000,
-            });
-          },
-          error: () => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Lỗi',
-              detail: 'Đã có lỗi xảy ra!',
-            });
-          },
-        });
-      },
-    });
-  }
 }
