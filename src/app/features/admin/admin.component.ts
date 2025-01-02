@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AdminHeaderComponent } from '../../shared/components/admin-header/admin-header.component';
-import { AdminSidebarComponent } from '../../shared/components/admin-sidebar/admin-sidebar.component';
 import { TokenStorageService } from '../../core/services/auth/token-storage.service';
 
 

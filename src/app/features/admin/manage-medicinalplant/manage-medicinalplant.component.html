@@ -244,7 +244,8 @@
       <div class="row mt-4">
         <div class="col-12">
           <p-fileUpload 
-            name="images[]" 
+            #fileUpload
+            name="imagesArray()" 
             (uploadHandler)="onUpload($event)"
             [multiple]="true" accept="image/*" 
             maxFileSize="5242880"

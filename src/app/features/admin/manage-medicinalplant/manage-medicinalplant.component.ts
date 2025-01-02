@@ -1,4 +1,4 @@
-import { Component, effect, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, effect, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormArray,
@@ -22,7 +22,7 @@ import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api'
 import { catchError, finalize, firstValueFrom, forkJoin, map, Observable, switchMap, tap } from 'rxjs';
 import { MedicinalPlant } from '../../../core/models/medical-plant.model';
 import { MedicinalPlantService } from '../../../core/services/medical-plant.service';
-import { FileRemoveEvent, FileUploadEvent, FileUploadHandlerEvent, FileUploadModule } from 'primeng/fileupload';
+import { FileRemoveEvent, FileUpload, FileUploadEvent, FileUploadHandlerEvent, FileUploadModule } from 'primeng/fileupload';
 import { BadgeModule } from 'primeng/badge';
 import { FamilyService } from '../../../core/services/family.service';
 import { Family } from '../../../core/models/family.model';
@@ -53,6 +53,7 @@ import { HttpClient } from '@angular/common/http';
   //encapsulation: ViewEncapsulation.None,
 })
 export class ManageMedicinalplantComponent implements OnInit {
+  @ViewChild('fileUpload') fileUpload!: FileUpload; // Tham chiếu tới p-fileUpload
   ngOnInit(): void {
     this.loadPlants();
     this.loadFamilies();
@@ -198,13 +199,8 @@ export class ManageMedicinalplantComponent implements OnInit {
     // Clear uploaded files nếu cần
     this.uploadedFiles = [];
 
-    //const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
-    let imagesElement = document.querySelector("#medicinalPlantContainer > div.row.mt-4 > div.col-12 > p-fileupload > div > div.p-fileupload-content > div > div > div:nth-child(1) > div:nth-child(4) > button") as HTMLButtonElement;
-    if (imagesElement) {
-      // fileInput.files = null; // Xóa giá trị của input file
-      // fileInput.dispatchEvent(new Event('change'));
-      // (imagesElement as HTMLElement).click();
-      console.log("true");
+    if (this.fileUpload) {
+      this.fileUpload.clear(); // Gọi hàm clear() để xóa các file đã chọn
     }
   }
 
