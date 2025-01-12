@@ -227,17 +227,6 @@ export class ManageMedicinalplantComponent implements OnInit {
     });
     
 
-    // Gán mảng `images` từ `plant.images`
-    // this.uploadedFiles = plant.images.map((image: any) => ({
-    //   name: image.url.split('/').pop(), // Lấy tên file từ URL
-    //   url: image.url,
-    // }));
-    // const imagesArray = this.plantForm.get('images') as FormArray;
-    // imagesArray.clear();
-    // plant.images.forEach((image: any) => {
-    //   imagesArray.push(new FormControl({ id: image.id, url: image.url }));
-    // });
-
     if (plant.images && plant.images.length > 0) {
       const dataTransfer = new DataTransfer();
   
@@ -293,8 +282,22 @@ export class ManageMedicinalplantComponent implements OnInit {
     console.log(id);
   
     const updateObservable = this.dialogMode === 'edit'
-      ? this.addVectorToQdrant(id, vector, vietnameseName).pipe(
-          switchMap(() => this.uploadFilesToCloudinary(this.uploadedFiles)),
+      ? this.uploadFilesToCloudinary(this.uploadedFiles).pipe(
+        switchMap((uploadedUrls: string[]) => {
+          this.imagesArray.clear();
+          uploadedUrls.forEach((url) => {
+            this.imagesArray.push(new FormControl({ id: 0, url }));
+          });
+
+          const payload = this.plantForm.value;
+
+          return this.http.put(
+            `https://localhost:7150/api/MedicinalPlant/${id}`,
+            payload
+          );
+        })
+      )
+      : this.uploadFilesToCloudinary(this.uploadedFiles).pipe(
           switchMap((uploadedUrls: string[]) => {
             this.imagesArray.clear();
             uploadedUrls.forEach((url) => {
@@ -302,24 +305,6 @@ export class ManageMedicinalplantComponent implements OnInit {
             });
   
             const payload = this.plantForm.value;
-            payload.vector = null;
-  
-            return this.http.put(
-              `https://localhost:7150/api/MedicinalPlant/${id}`,
-              payload
-            );
-          })
-        )
-      : this.addVectorToQdrant(id, vector, vietnameseName).pipe(
-          switchMap(() => this.uploadFilesToCloudinary(this.uploadedFiles)),
-          switchMap((uploadedUrls: string[]) => {
-            this.imagesArray.clear();
-            uploadedUrls.forEach((url) => {
-              this.imagesArray.push(new FormControl({ id: 0, url }));
-            });
-  
-            const payload = this.plantForm.value;
-            payload.vector = null;
   
             return this.http.post('https://localhost:7150/api/MedicinalPlant', payload);
           })
@@ -374,29 +359,6 @@ export class ManageMedicinalplantComponent implements OnInit {
     return forkJoin(requests).pipe(
       tap((urls: string[]) => uploadedUrls.push(...urls)),
       map(() => uploadedUrls)
-    );
-  }
-
-  addVectorToQdrant(id: number, vector: number[], payload: any): Observable<any> {
-    const url = 'http://52.65.227.224:6333/collections/medical-plants/points';
-  
-    const body = {
-      points: [
-        {
-          id: id, // ID của vector
-          vector: vector, // Giá trị vector
-          payload: { "Tên cây thuốc": payload }, // Thông tin bổ sung
-        },
-      ],
-    };
-  
-    console.log('Request Body:', body); // Debug để kiểm tra body gửi đi
-
-    return this.http.put(url, body).pipe(
-      catchError((error) => {
-        console.error('Lỗi khi thêm vector vào Qdrant:', error);
-        throw error;
-      })
     );
   }
   
