@@ -208,6 +208,9 @@ export class ManageMedicinalplantComponent implements OnInit {
     this.dialogMode = 'edit';
     this.visible = true;
     this.selectedPlant = plant;
+    if (this.fileUpload) {
+      this.fileUpload.clear(); // Gọi hàm clear() để xóa các file đã chọn
+    }
   
     // Gán giá trị đầy đủ vào form
     this.plantForm.patchValue({
